@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crisis Resources - Emancipation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            color: #2d3748;
+            overflow-x: hidden;
+            background: #f5f7fa;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .dove-mascot {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .back-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Alert Banner */
+        .alert-banner {
+            margin-top: 80px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .alert-banner h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-banner p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .emergency-notice {
+            background: white;
+            color: #f5576c;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            margin: 1rem auto 0;
+            max-width: 800px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Immediate Help Section */
+        .immediate-help {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .help-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border-left: 5px solid;
+        }
+
+        .help-card.urgent {
+            border-left-color: #f5576c;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+        }
+
+        .help-card.support {
+            border-left-color: #667eea;
+        }
+
+        .help-card.text {
+            border-left-color: #55efc4;
+        }
+
+        .help-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .help-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .help-card.urgent .help-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .help-card.support .help-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .help-card.text .help-icon {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+        }
+
+        .help-card h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .help-card .hotline {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f5576c;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
+        .help-card.support .hotline {
+            color: #667eea;
+        }
+
+        .help-card.text .hotline {
+            color: #00b894;
+        }
+
+        .availability {
+            display: inline-block;
+            background: #f7fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin: 0.5rem 0;
+        }
+
+        .help-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .call-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .call-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .help-card.urgent .call-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .help-card.text .call-btn {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+        }
+
+        /* Resources by Topic */
+        .resources-by-topic {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .resources-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+            border-top: 4px solid;
+            cursor: pointer;
+        }
+
+        .topic-card:nth-child(1) { border-top-color: #f5576c; }
+        .topic-card:nth-child(2) { border-top-color: #667eea; }
+        .topic-card:nth-child(3) { border-top-color: #55efc4; }
+        .topic-card:nth-child(4) { border-top-color: #FFD93D; }
+        .topic-card:nth-child(5) { border-top-color: #a29bfe; }
+        .topic-card:nth-child(6) { border-top-color: #fd79a8; }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .topic-card p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .resource-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Safety Planning */
+        .safety-planning {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .safety-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .safety-steps {
+            margin-top: 2rem;
+        }
+
+        .safety-step {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .safety-step h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .safety-step p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Trusted Adults Tool */
+        .trusted-adults {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 4rem 2rem;
+        }
+
+        .trusted-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .circle-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .circle-entry {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .add-person-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-person-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .save-circle-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .save-circle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Important Notice */
+        .important-notice {
+            background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+            color: #2d3748;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 3rem auto;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .important-notice h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .important-notice p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #a0aec0;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .alert-banner h1 {
+                font-size: 1.5rem;
+            }
+
+            .alert-banner p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .safety-card {
+                padding: 2rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/index.html" class="logo">
+                <span class="dove-mascot">🕊️</span>
+                Emancipation
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#mission">Mission</a></li>
+                <li><a href="index.html#learning">Learning Hubs</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="/index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Alert Banner -->
+    <section class="alert-banner">
+        <h1>🆘 You Are Not Alone</h1>
+        <p>If you or someone you know needs immediate help, these resources are available 24/7</p>
+        <div class="emergency-notice">
+            ⚠️ If you are in immediate danger, please call 911 or your local emergency services
+        </div>
+    </section>
+
+    <!-- Immediate Help -->
+    <section class="immediate-help">
+        <div class="section-header">
+            <h2>Immediate Crisis Support</h2>
+            <p>Confidential, free support available 24 hours a day, 7 days a week</p>
+        </div>
+
+        <div class="help-grid">
+            <div class="help-card urgent">
+                <div class="help-icon">📞</div>
+                <h3>National Sexual Assault Hotline</h3>
+                <div class="hotline">1-800-656-4673</div>
+                <span class="availability">🟢 Available 24/7</span>
+                <p class="help-description">
+                    Confidential support from trained staff for survivors of sexual assault. Available in multiple languages.
+                </p>
+                <a href="tel:1-800-656-4673" class="call-btn">Call Now</a>
+            </div>
+
+            <div class="help-card support">
+                <div class="help-icon">💬</div>
+                <h3>National Domestic Violence Hotline</h3>
+                <div class="hotline">1-800-799-7233</div>
+                <span class="availability">🟢 Available 24/7</span>
+                <p class="help-description">
+                    Support, resources, and safety planning for those experiencing domestic violence. TTY: 1-800-787-3224
+                </p>
+                <a href="tel:1-800-799-7233" class="call-btn">Call Now</a>
+            </div>
+
+            <div class="help-card text">
+                <div class="help-icon">💬</div>
+                <h3>Crisis Text Line</h3>
+                <div class="hotline">Text HOME to 741741</div>
+                <span class="availability">🟢 Available 24/7</span>
+                <p class="help-description">
+                    Free, 24/7 text-based support for any crisis. Connect with a trained crisis counselor via text message.
+                </p>
+                <a href="sms:741741&body=HOME" class="call-btn">Text Now</a>
+            </div>
+
+            <div class="help-card support">
+                <div class="help-icon">🧠</div>
+                <h3>RAINN (Rape, Abuse & Incest National Network)</h3>
+                <div class="hotline">1-800-656-4673</div>
+                <span class="availability">🟢 Available 24/7</span>
+                <p class="help-description">
+                    The nation's largest anti-sexual violence organization. Free and confidential support for survivors.
+                </p>
+                <a href="tel:1-800-656-4673" class="call-btn">Call Now</a>
+            </div>
+
+            <div class="help-card text">
+                <div class="help-icon">🌈</div>
+                <h3>The Trevor Project (LGBTQ+ Youth)</h3>
+                <div class="hotline">1-866-488-7386</div>
+                <span class="availability">🟢 Available 24/7</span>
+                <p class="help-description">
+                    Crisis intervention and suicide prevention for LGBTQ+ young people. Text START to 678-678.
+                </p>
+                <a href="tel:1-866-488-7386" class="call-btn">Call Now</a>
+            </div>
+
+            <div class="help-card urgent">
+                <div class="help-icon">👨‍⚕️</div>
+                <h3>National Suicide Prevention Lifeline</h3>
+                <div class="hotline">988</div>
+                <span class="availability">🟢 Available 24/7</span>
+                <p class="help-description">
+                    Free and confidential support for people in distress, mental health crisis, or suicidal thoughts.
+                </p>
+                <a href="tel:988" class="call-btn">Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources by Topic -->
+    <section class="resources-by-topic">
+        <div class="resources-container">
+            <div class="section-header">
+                <h2>Resources by Topic</h2>
+                <p>Find specific help for different situations</p>
+            </div>
+
+            <div class="topic-grid">
+                <div class="topic-card" onclick="toggleResources('domestic-violence')">
+                    <div class="topic-icon">🏠</div>
+                    <h3>Domestic Violence</h3>
+                    <p>Support for those experiencing violence at home</p>
+                    <ul class="resource-list" id="domestic-violence" style="display: none;">
+                        <li>National Domestic Violence Hotline: 1-800-799-7233</li>
+                        <li>Text START to 88788</li>
+                        <li>Online chat at thehotline.org</li>
+                        <li>Safety planning resources</li>
+                        <li>Legal advocacy services</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" onclick="toggleResources('sexual-abuse')">
+                    <div class="topic-icon">🛡️</div>
+                    <h3>Sexual Abuse & Assault</h3>
+                    <p>Confidential support for survivors</p>
+                    <ul class="resource-list" id="sexual-abuse" style="display: none;">
+                        <li>RAINN Hotline: 1-800-656-4673</li>
+                        <li>Online chat at online.rainn.org</li>
+                        <li>Local SANE (Sexual Assault Nurse Examiner) programs</li>
+                        <li>Legal resources and advocacy</li>
+                        <li>Counseling referrals</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" onclick="toggleResources('mental-health')">
+                    <div class="topic-icon">🧠</div>
+                    <h3>Mental Health</h3>
+                    <p>Support for emotional wellbeing</p>
+                    <ul class="resource-list" id="mental-health" style="display: none;">
+                        <li>National Suicide Prevention Lifeline: 988</li>
+                        <li>Crisis Text Line: Text HOME to 741741</li>
+                        <li>SAMHSA Helpline: 1-800-662-4357</li>
+                        <li>Teen Line: 1-800-852-8336 (6pm-10pm PST)</li>
+                        <li>Psychology Today therapist finder</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" onclick="toggleResources('lgbtq')">
+                    <div class="topic-icon">🌈</div>
+                    <h3>LGBTQ+ Support</h3>
+                    <p>Affirming resources for LGBTQ+ youth and adults</p>
+                    <ul class="resource-list" id="lgbtq" style="display: none;">
+                        <li>Trevor Project: 1-866-488-7386</li>
+                        <li>Text START to 678-678</li>
+                        <li>Trans Lifeline: 1-877-565-8860</li>
+                        <li>GLBT National Hotline: 1-888-843-4564</li>
+                        <li>PFLAG (Parents & Friends) support groups</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" onclick="toggleResources('substance')">
+                    <div class="topic-icon">💊</div>
+                    <h3>Substance Abuse</h3>
+                    <p>Help for addiction and substance use concerns</p>
+                    <ul class="resource-list" id="substance" style="display: none;">
+                        <li>SAMHSA Helpline: 1-800-662-4357</li>
+                        <li>Alcoholics Anonymous: aa.org</li>
+                        <li>Narcotics Anonymous: na.org</li>
+                        <li>Al-Anon (for families): 1-888-425-2666</li>
+                        <li>Treatment center locator at findtreatment.gov</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" onclick="toggleResources('child-abuse')">
+                    <div class="topic-icon">👶</div>
+                    <h3>Child Abuse</h3>
+                    <p>Protection and support for children</p>
+                    <ul class="resource-list" id="child-abuse" style="display: none;">
+                        <li>Childhelp National Hotline: 1-800-422-4453</li>
+                        <li>24/7 crisis counseling</li>
+                        <li>Mandatory reporting information</li>
+                        <li>Child Protective Services contact</li>
+                        <li>Court Appointed Special Advocates (CASA)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Planning -->
+    <section class="safety-planning">
+        <div class="section-header">
+            <h2>Safety Planning Guide</h2>
+            <p>Steps you can take to protect yourself</p>
+        </div>
+
+        <div class="safety-card">
+            <div class="safety-steps">
+                <div class="safety-step">
+                    <h4>1. Identify Safe Places</h4>
+                    <p>Know where you can go if you need to leave quickly: a friend's house, family member's home, shelter, public place, or library. Memorize important addresses and phone numbers.</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>2. Create a Signal System</h4>
+                    <p>Establish a code word or signal with trusted friends, family, or neighbors that means you need help immediately. This can be a text, phone call, or in-person signal.</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>3. Pack an Emergency Bag</h4>
+                    <p>Keep important documents, money, medications, clothes, and essentials in a safe place where you can grab them quickly if needed. Consider keeping a bag with a trusted friend.</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>4. Document Everything</h4>
+                    <p>Keep records of incidents, take photos of injuries, save threatening messages. Store copies in a safe place (with a trusted person or in the cloud using a secure, private account).</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>5. Know Your Legal Rights</h4>
+                    <p>Learn about protective orders, your rights as a survivor, and local laws. Many legal aid organizations offer free consultations for domestic violence cases.</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>6. Digital Safety</h4>
+                    <p>Change passwords, check privacy settings, be aware that phones/computers can be monitored. Use devices at a library or friend's house if needed. Clear browser history.</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>7. Plan Your Exit Route</h4>
+                    <p>If you need to leave, know the fastest way out of your home. Practice the route. Keep car keys and phone accessible. Consider telling neighbors to call police if they hear disturbances.</p>
+                </div>
+
+                <div class="safety-step">
+                    <h4>8. Financial Planning</h4>
+                    <p>Try to save money in a safe place. Keep important financial documents secure. Consider opening a bank account at a different bank. Know where financial resources are located.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted Adults Tool -->
+    <section class="trusted-adults">
+        <div class="trusted-container">
+            <div class="section-header">
+                <h2>Build Your Trusted Circle</h2>
+                <p>Identify 5 trusted adults you can talk to when you need help</p>
+            </div>
+
+            <div class="circle-form">
+                <p style="margin-bottom: 2rem; color: #4a5568; line-height: 1.6;">
+                    Having trusted adults in your life is important. These should be people who make you feel safe, listen to you, and can help in different situations. Think about family members, teachers, counselors, coaches, or family friends.
+                </p>
+
+                <div id="circleEntries">
+                    <div class="circle-entry" data-entry="1">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">Trusted Adult #1</h4>
+                        <div class="form-group">
+                            <label for="name1">Name:</label>
+                            <input type="text" id="name1" placeholder="e.g., Mrs. Johnson">
+                        </div>
+                        <div class="form-group">
+                            <label for="relationship1">Relationship:</label>
+                            <input type="text" id="relationship1" placeholder="e.g., School Counselor, Aunt, Coach">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone1">Phone Number (optional):</label>
+                            <input type="tel" id="phone1" placeholder="e.g., (555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="when1">When to Contact:</label>
+                            <textarea id="when1" rows="2" placeholder="e.g., When I'm feeling scared at home, when I need to talk about school problems"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="add-person-btn" onclick="addTrustedPerson()">+ Add Another Trusted Adult</button>
+                <button class="save-circle-btn" onclick="saveTrustedCircle()">💾 Save My Trusted Circle</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Notice -->
+    <div class="important-notice">
+        <h3>⚠️ Important Privacy Notice</h3>
+        <p>
+            If you're in an unsafe situation, be aware that your internet activity may be monitored. If you need to leave this page quickly, press the ESC key or click <a href="https://www.google.com" style="color: #2d3748; text-decoration: underline; font-weight: 700;">here</a> to go to Google. Consider using a computer at a library, friend's house, or work if you're concerned about monitoring.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Emancipation</h3>
+                <p>Building a safer tomorrow through education today.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="parent-dashboard.html">For Parents</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Help</h3>
+                <ul>
+                    <li><a href="crisis.html">Crisis Resources</a></li>
+                    <li><a href="#">Support Services</a></li>
+                    <li><a href="#">Find Local Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Partner With Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Emancipation. Together, we're building a world where every child is safe, respected, and empowered.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle resource lists
+        function toggleResources(topicId) {
+            const resourceList = document.getElementById(topicId);
+            if (resourceList.style.display === 'none') {
+                resourceList.style.display = 'block';
+            } else {
+                resourceList.style.display = 'none';
+            }
+        }
+
+        // Trusted Circle Management
+        let trustedPersonCount = 1;
+
+        function addTrustedPerson() {
+            if (trustedPersonCount >= 5) {
+                alert('You can add up to 5 trusted adults. If you need more, consider printing this list and adding them separately.');
+                return;
+            }
+
+            trustedPersonCount++;
+            const container = document.getElementById('circleEntries');
+            
+            const entryHTML = `
+                <div class="circle-entry" data-entry="${trustedPersonCount}">
+                    <h4 style="color: #667eea; margin-bottom: 1rem;">Trusted Adult #${trustedPersonCount}</h4>
+                    <div class="form-group">
+                        <label for="name${trustedPersonCount}">Name:</label>
+                        <input type="text" id="name${trustedPersonCount}" placeholder="e.g., Mr. Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="relationship${trustedPersonCount}">Relationship:</label>
+                        <input type="text" id="relationship${trustedPersonCount}" placeholder="e.g., Teacher, Uncle, Pastor">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone${trustedPersonCount}">Phone Number (optional):</label>
+                        <input type="tel" id="phone${trustedPersonCount}" placeholder="e.g., (555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="when${trustedPersonCount}">When to Contact:</label>
+                        <textarea id="when${trustedPersonCount}" rows="2" placeholder="e.g., When I need advice, when something scary happens"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', entryHTML);
+        }
+
+        function saveTrustedCircle() {
+            const trustedCircle = [];
+            
+            for (let i = 1; i <= trustedPersonCount; i++) {
+                const name = document.getElementById(`name${i}`).value;
+                const relationship = document.getElementById(`relationship${i}`).value;
+                const phone = document.getElementById(`phone${i}`).value;
+                const when = document.getElementById(`when${i}`).value;
+                
+                if (name && relationship) {
+                    trustedCircle.push({
+                        name: name,
+                        relationship: relationship,
+                        phone: phone,
+                        whenToContact: when
+                    });
+                }
+            }
+            
+            if (trustedCircle.length === 0) {
+                alert('Please add at least one trusted adult before saving.');
+                return;
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('trusted_circle', JSON.stringify(trustedCircle));
+            
+            alert(`✅ Your Trusted Circle has been saved! You've added ${trustedCircle.length} trusted adult(s). You can come back and update this list anytime.`);
+        }
+
+        // Load saved trusted circle on page load
+        function loadTrustedCircle() {
+            const saved = localStorage.getItem('trusted_circle');
+            if (saved) {
+                const circle = JSON.parse(saved);
+                
+                // Clear existing entries
+                document.getElementById('circleEntries').innerHTML = '';
+                trustedPersonCount = 0;
+                
+                // Add saved entries
+                circle.forEach((person, index) => {
+                    if (index > 0) addTrustedPerson();
+                    
+                    const num = index + 1;
+                    document.getElementById(`name${num}`).value = person.name;
+                    document.getElementById(`relationship${num}`).value = person.relationship;
+                    document.getElementById(`phone${num}`).value = person.phone || '';
+                    document.getElementById(`when${num}`).value = person.whenToContact || '';
+                });
+            }
+        }
+
+        // Quick exit function
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.location.replace('https://www.google.com');
+            }
+        });
+
+        // Load saved circle on page load
+        document.addEventListener('DOMContentLoaded', loadTrustedCircle);
+
+        // Smooth scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
