@@ -388,6 +388,97 @@
         .hidden {
             display: none;
         }
+
+        /* Back Button */
+        .back-home {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-home:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        /* Emmy Helper Button */
+        .emmy-helper-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+
+        .emmy-helper-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            animation: emmyBounce 2s ease-in-out infinite;
+        }
+
+        .emmy-helper-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .emmy-helper-icon {
+            font-size: 1.5rem;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .emmy-helper-text {
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        @keyframes emmyBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Mobile responsive for helper button */
+        @media (max-width: 768px) {
+            .emmy-helper-btn {
+                bottom: 1.5rem;
+                left: 1.5rem;
+            }
+            .emmy-helper-link {
+                padding: 0.8rem 1.2rem;
+                border-radius: 40px;
+            }
+            .emmy-helper-text {
+                font-size: 0.9rem;
+            }
+            .emmy-helper-icon {
+                font-size: 1.3rem;
+            }
+            .back-home {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                padding: 0.8rem 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -781,5 +872,16 @@
             }
         });
     </script>
+
+    <!-- Back to Home -->
+    <a href="/index.html" class="back-home">🏠 Home</a>
+
+    <!-- Emmy Helper Button -->
+    <div class="emmy-helper-btn">
+        <a href="emmy-chat.html" class="emmy-helper-link" title="Ask Emmy for Help">
+            <span class="emmy-helper-icon">🕊️</span>
+            <span class="emmy-helper-text">Ask Emmy</span>
+        </a>
+    </div>
 </body>
 </html>
