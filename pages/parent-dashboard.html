@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard | Emancipation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #667eea;
+            --primary-purple-dark: #764ba2;
+            --yellow: #FFD93D;
+            --blue: #74b9ff;
+            --green: #55efc4;
+            --red-accent: #f5576c;
+            --white: #ffffff;
+            --gray-light: #f7fafc;
+            --gray: #4a5568;
+            --gray-dark: #2d3748;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            text-decoration: none;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-btn {
+            background: var(--red-accent);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-purple-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-purple);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-purple);
+            border-bottom-color: var(--primary-purple);
+        }
+
+        /* Main Content */
+        .dashboard-main {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Child Selector */
+        .child-selector {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .child-selector select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        /* Skills Chart */
+        .skills-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .skill-item {
+            margin-bottom: 2rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .skill-score {
+            font-weight: 700;
+            color: var(--primary-purple);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 25px;
+            background: var(--gray-light);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-purple-dark));
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .trend-up {
+            color: var(--green);
+            margin-left: 0.5rem;
+        }
+
+        .trend-stable {
+            color: var(--blue);
+            margin-left: 0.5rem;
+        }
+
+        /* Activity Timeline */
+        .activity-timeline {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-purple);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Badges Section */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .badge-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .badge-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-name {
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .badge-date {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Alerts Section */
+        .alert-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-box.warning {
+            background: #f8d7da;
+            border-left-color: var(--red-accent);
+        }
+
+        .alert-box h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Resources Section */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card h3 {
+            color: var(--primary-purple);
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            background: var(--primary-purple);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Reports Section */
+        .report-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .chart-placeholder {
+            background: var(--gray-light);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-nav {
+                flex-direction: column;
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <span>🕊️</span>
+                Emancipation
+            </a>
+            <div class="nav-user">
+                <span>👤 Parent Portal</span>
+                <button class="logout-btn" onclick="alert('Logout functionality')">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <h1>Parent & Educator Dashboard</h1>
+        <p>Track progress, access resources, and support your child's learning journey</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+        <button class="tab-btn active" data-tab="progress">Child's Progress</button>
+        <button class="tab-btn" data-tab="resources">Resources</button>
+        <button class="tab-btn" data-tab="guides">Conversation Guides</button>
+        <button class="tab-btn" data-tab="reports">Monthly Reports</button>
+        <button class="tab-btn" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-main">
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <h2 style="margin-bottom: 2rem;">Dashboard Settings</h2>
+
+            <div class="report-card">
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Notification Preferences</h3>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px;">
+                        <span>Email me weekly progress summaries</span>
+                    </label>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px;">
+                        <span>Alert me when my child earns a new badge</span>
+                    </label>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px;">
+                        <span>Notify me of concerning behavior patterns</span>
+                    </label>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" style="width: 20px; height: 20px;">
+                        <span>Send me monthly conversation prompts</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="report-card" style="margin-top: 2rem;">
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Manage Children</h3>
+                
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Emma</strong> (Age 8 - Heroes of Home)
+                        </div>
+                        <button class="download-btn" onclick="alert('Edit child profile')">Edit</button>
+                    </div>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Jack</strong> (Age 11 - Reality Rangers)
+                        </div>
+                        <button class="download-btn" onclick="alert('Edit child profile')">Edit</button>
+                    </div>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Sophia</strong> (Age 13 - Truth Tribe)
+                        </div>
+                        <button class="download-btn" onclick="alert('Edit child profile')">Edit</button>
+                    </div>
+                </div>
+
+                <button class="download-btn" style="background: var(--green); margin-top: 1rem;" onclick="alert('Add new child')">+ Add Another Child</button>
+            </div>
+
+            <div class="report-card" style="margin-top: 2rem;">
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Parent Education Modules</h3>
+                <p style="color: var(--gray); margin-bottom: 1.5rem;">Complete modules to deepen your understanding and earn certificates.</p>
+
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>Understanding Gender-Based Violence Prevention</strong>
+                        <span style="color: var(--green);">✓ Completed</span>
+                    </div>
+                    <div style="background: white; height: 8px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: var(--green); height: 100%; width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>Building Emotional Intelligence at Home</strong>
+                        <span style="color: var(--primary-purple);">60% Complete</span>
+                    </div>
+                    <div style="background: white; height: 8px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: var(--primary-purple); height: 100%; width: 60%;"></div>
+                    </div>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong>Digital Parenting in 2025</strong>
+                        <span style="color: var(--gray);">Not Started</span>
+                    </div>
+                    <div style="background: white; height: 8px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: var(--gray); height: 100%; width: 0%;"></div>
+                    </div>
+                </div>
+
+                <button class="download-btn" style="width: 100%; margin-top: 1rem;" onclick="alert('Open learning modules')">Continue Learning</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+                // Show selected tab content
+                const tabId = button.dataset.tab;
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Child selector change handler
+        document.getElementById('child-select').addEventListener('change', (e) => {
+            const childId = e.target.value;
+            console.log('Loading data for child:', childId);
+            // In production: This would load different child's data via API
+            alert(`Loading progress data for ${e.target.options[e.target.selectedIndex].text}`);
+        });
+
+        // Animate skill bars on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.skill-fill').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html> Child Progress Tab -->
+        <div id="progress" class="tab-content active">
+            <div class="child-selector">
+                <label style="font-weight: 600; display: block; margin-bottom: 0.5rem;">Select Child:</label>
+                <select id="child-select">
+                    <option value="emma">Emma (Age 8 - Heroes of Home)</option>
+                    <option value="jack">Jack (Age 11 - Reality Rangers)</option>
+                    <option value="sophia">Sophia (Age 13 - Truth Tribe)</option>
+                </select>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value">12h 45m</div>
+                    <div class="stat-label">Total Learning Time</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value">23</div>
+                    <div class="stat-label">Activities Completed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value">7 Days</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Badges Earned</div>
+                </div>
+            </div>
+
+            <!-- Skills Development -->
+            <div class="skills-section">
+                <h2 style="margin-bottom: 1.5rem;">AI Moral Growth Tracker</h2>
+                <p style="color: var(--gray); margin-bottom: 2rem;">Based on your child's choices in stories, games, and reflections, we track development in key areas.</p>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">💚 Empathy</span>
+                        <span class="skill-score">75% <span class="trend-up">↑ Increasing</span></span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 75%;">75%</div>
+                    </div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray);">
+                        <strong>Evidence:</strong> Chose kind responses in 8/10 scenarios, completed "Feelings Detective" perfectly
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">💪 Courage</span>
+                        <span class="skill-score">60% <span class="trend-stable">→ Stable</span></span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 60%;">60%</div>
+                    </div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray);">
+                        <strong>Evidence:</strong> Selected "stand up" options in 6/10 scenarios
+                    </p>
+                    <p style="margin-top: 0.3rem; font-size: 0.9rem; color: var(--primary-purple);">
+                        <strong>💡 Suggestion:</strong> Encourage real-world practice: standing up for siblings
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">🤝 Respect</span>
+                        <span class="skill-score">85% <span class="trend-up">↑ Increasing</span></span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 85%;">85%</div>
+                    </div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray);">
+                        <strong>Evidence:</strong> 100% on consent quiz, consistently asks permission in games
+                    </p>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">💬 Communication</span>
+                        <span class="skill-score">70% <span class="trend-up">↑ Increasing</span></span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 70%;">70%</div>
+                    </div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray);">
+                        <strong>Evidence:</strong> Used kind words in all scenarios, completed "Kind Words Match" 5 times
+                    </p>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="activity-timeline">
+                <h2 style="margin-bottom: 1.5rem;">Recent Activities</h2>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">📖</div>
+                    <div class="timeline-content">
+                        <h4>The Equality Squad: Episode 3</h4>
+                        <div class="timeline-date">October 25, 2025 • 15 minutes</div>
+                        <p>Great! Chose inclusive options throughout the story.</p>
+                        <p style="font-style: italic; margin-top: 0.5rem; color: var(--gray);">Reflection: "I would invite the new kid to play with us"</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🎮</div>
+                    <div class="timeline-content">
+                        <h4>Respect Response Training</h4>
+                        <div class="timeline-date">October 24, 2025 • 10 minutes</div>
+                        <p>Score: 85/100 - Excellent communication skills demonstrated</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🏆</div>
+                    <div class="timeline-content">
+                        <h4>Badge Earned: Respect Ranger</h4>
+                        <div class="timeline-date">October 22, 2025</div>
+                        <p>Perfect score on 5 respect scenarios</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🎨</div>
+                    <div class="timeline-content">
+                        <h4>Created Hero Character</h4>
+                        <div class="timeline-date">October 20, 2025 • 8 minutes</div>
+                        <p>Hero Name: "Captain Kindness" with Super Empathy power</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badges Earned -->
+            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                <h2 style="margin-bottom: 1.5rem;">Badges Earned</h2>
+                <div class="badges-grid">
+                    <div class="badge-card">
+                        <div class="badge-icon">🌟</div>
+                        <div class="badge-name">Kindness Cadet</div>
+                        <div class="badge-date">Oct 20, 2025</div>
+                    </div>
+
+                    <div class="badge-card">
+                        <div class="badge-icon">🎖️</div>
+                        <div class="badge-name">Respect Ranger</div>
+                        <div class="badge-date">Oct 22, 2025</div>
+                    </div>
+
+                    <div class="badge-card">
+                        <div class="badge-icon">🤝</div>
+                        <div class="badge-name">Inclusion Hero</div>
+                        <div class="badge-date">Oct 25, 2025</div>
+                    </div>
+
+                    <div class="badge-card">
+                        <div class="badge-icon">💬</div>
+                        <div class="badge-name">Communication Star</div>
+                        <div class="badge-date">Oct 23, 2025</div>
+                    </div>
+
+                    <div class="badge-card">
+                        <div class="badge-icon">🦸</div>
+                        <div class="badge-name">Hero Creator</div>
+                        <div class="badge-date">Oct 20, 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <h2 style="margin-bottom: 2rem;">Parent & Educator Resources</h2>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>📚 Activity Sheets</h3>
+                    <p>Downloadable worksheets and activities to reinforce learning at home.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Family Respect Rules Poster</li>
+                        <li>"My Trusted Circle" Template</li>
+                        <li>Emotion Faces Flashcards</li>
+                        <li>Safe Touch Body Chart</li>
+                    </ul>
+                    <button class="download-btn" onclick="alert('Would download PDF bundle')">Download All (PDF)</button>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🎥 Video Resources</h3>
+                    <p>Expert guidance on using the platform and supporting your child.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Platform Tutorial (5 min)</li>
+                        <li>Understanding the AI Tracker (8 min)</li>
+                        <li>Age-by-Age Development Guide (12 min)</li>
+                        <li>Expert Q&A Sessions</li>
+                    </ul>
+                    <button class="download-btn" onclick="alert('Would open video library')">Watch Videos</button>
+                </div>
+
+                <div class="resource-card">
+                    <h3>📖 Reading Materials</h3>
+                    <p>In-depth articles and research on child development and safety.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Understanding Gender-Based Violence Prevention</li>
+                        <li>Building Emotional Intelligence</li>
+                        <li>Digital Parenting Guide</li>
+                        <li>Creating a Safe Home Environment</li>
+                    </ul>
+                    <button class="download-btn" onclick="alert('Would open library')">Access Library</button>
+                </div>
+
+                <div class="resource-card">
+                    <h3>👥 Community</h3>
+                    <p>Connect with other parents and educators.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Parent Discussion Forum</li>
+                        <li>Monthly Virtual Meetups</li>
+                        <li>Share Strategies & Experiences</li>
+                        <li>School Partnership Toolkit</li>
+                    </ul>
+                    <button class="download-btn" onclick="alert('Would open community portal')">Join Community</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conversation Guides Tab -->
+        <div id="guides" class="tab-content">
+            <h2 style="margin-bottom: 2rem;">Conversation Guides</h2>
+            <p style="color: var(--gray); margin-bottom: 2rem;">Age-appropriate guides to help you discuss important topics with your child.</p>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Ages 3-5</h3>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Talking About Kindness & Sharing</li>
+                        <li>Introducing Body Boundaries</li>
+                        <li>Teaching "No Means No"</li>
+                        <li>Emotions Are Okay</li>
+                    </ul>
+                    <button class="download-btn">Download Guides</button>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Ages 6-8</h3>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Explaining Consent Simply</li>
+                        <li>Dealing with Bullying</li>
+                        <li>Recognizing Safe vs Unsafe Situations</li>
+                        <li>Building Confidence to Speak Up</li>
+                    </ul>
+                    <button class="download-btn">Download Guides</button>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Ages 9-11</h3>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Puberty & Body Respect</li>
+                        <li>Online Safety & Digital Footprint</li>
+                        <li>Peer Pressure Conversations</li>
+                        <li>Recognizing Warning Signs</li>
+                    </ul>
+                    <button class="download-btn">Download Guides</button>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Ages 12-14</h3>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>The Comprehensive Consent Talk</li>
+                        <li>Healthy vs Unhealthy Relationships</li>
+                        <li>Supporting LGBTQ+ Youth</li>
+                        <li>When Your Child Witnesses Violence</li>
+                    </ul>
+                    <button class="download-btn">Download Guides</button>
+                </div>
+            </div>
+
+            <div class="alert-box" style="margin-top: 2rem;">
+                <h4>💡 Tips for Difficult Conversations</h4>
+                <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>Choose a calm, private time and place</li>
+                    <li>Use age-appropriate language</li>
+                    <li>Listen more than you talk</li>
+                    <li>Validate their feelings and questions</li>
+                    <li>Keep the door open for future conversations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Monthly Reports Tab -->
+        <div id="reports" class="tab-content">
+            <h2 style="margin-bottom: 2rem;">Monthly Progress Report</h2>
+            
+            <div class="report-card">
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">October 2025 Summary</h3>
+                <p style="color: var(--gray); margin-bottom: 2rem;">Your child showed strong growth in empathy and communication this month. Consider reinforcing courage skills with real-world practice.</p>
+
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                    <h4 style="margin-bottom: 1rem;">Time Spent Learning</h4>
+                    <div class="stats-grid">
+                        <div>
+                            <strong>Total:</strong> 15h 20min
+                        </div>
+                        <div>
+                            <strong>Stories:</strong> 6h
+                        </div>
+                        <div>
+                            <strong>Games:</strong> 5h
+                        </div>
+                        <div>
+                            <strong>Creative:</strong> 2h 20min
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--green);">📈 20% more than last month</p>
+                </div>
+
+                <h4 style="margin-bottom: 1rem;">Skills Development Trend</h4>
+                <div class="chart-placeholder">
+                    Line chart showing skill progression over weeks would display here
+                    <br>(Empathy: 65→68→72→75, Courage: 55→58→60→60, etc.)
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h4 style="margin-bottom: 1rem;">Key Achievements This Month</h4>
+                    <ul style="padding-left: 1.5rem;">
+                        <li>✅ Completed all Heroes of Home comics</li>
+                        <li>🏆 Earned 3 new badges</li>
+                        <li>🎨 Created first hero character</li>
+                        <li>🔥 Maintained 7-day learning streak</li>
+                    </ul>
+                </div>
+
+                <div class="alert-box" style="margin-top: 2rem;">
+                    <h4>📋 Recommendations for Next Month</h4>
+                    <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Your child shows interest in creative activities. Encourage them to submit a story to the Impact Zone.</li>
+                        <li>Courage skills are developing steadily. Practice scenarios at home: "What would you do if...?"</li>
+                        <li>Consider discussing Episode 4 together - it covers complex topics about secrets.</li>
+                    </ul>
+                </div>
+
+                <button class="download-btn" style="width: 100%; margin-top: 1.5rem;" onclick="alert('Would download PDF report')">Download Full Report (PDF)</button>
+            </div>
+        </div>
+
+        <!--

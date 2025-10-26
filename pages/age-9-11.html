@@ -1,21 +1,1233 @@
-<!--
-<div class="ranger-station">
-  <header class="ranger-header">
-    <div class="rank-display">Rank: Junior Ranger</div>
-    <div class="mission-stats">
-      <span>Empathy: 75%</span>
-      <span>Courage: 60%</span>
-      <span>Wisdom: 80%</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reality Rangers - Ages 9-11 | Emancipation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* Ranger Header */
+        .ranger-header {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .rank-display {
+            font-size: 1.5rem;
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #00b894;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .mission-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Main Container */
+        .ranger-station {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-panel {
+            text-align: center;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-panel h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Ranger Menu */
+        .ranger-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .ranger-btn {
+            background: white;
+            border: 4px solid #55efc4;
+            border-radius: 20px;
+            padding: 2rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .ranger-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(85, 239, 196, 0.4);
+            border-color: #00b894;
+        }
+
+        .ranger-btn .icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mission Area */
+        .mission-area {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            min-height: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .mission-area.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scenario Viewer */
+        .scenario-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .scenario-title {
+            font-size: 2rem;
+            color: #00b894;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Phone Simulation */
+        .phone-simulator {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 40px;
+            padding: 50px 20px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .phone-screen {
+            background: #f5f5f5;
+            border-radius: 20px;
+            height: 600px;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .chat-header {
+            background: #55efc4;
+            padding: 1rem;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            margin: -1rem -1rem 1rem -1rem;
+        }
+
+        .message {
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-sender {
+            font-weight: bold;
+            color: #00b894;
+            margin-bottom: 0.3rem;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #718096;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .choice-prompt {
+            background: #fff9e6;
+            border: 3px solid #FFD93D;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .choice-prompt-text {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .scenario-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .scenario-choice {
+            background: white;
+            border: 3px solid #55efc4;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .scenario-choice:hover {
+            background: #55efc4;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Rhythm Game */
+        .rhythm-game {
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            color: #00b894;
+            margin-bottom: 2rem;
+        }
+
+        .rhythm-score {
+            font-size: 2rem;
+            color: #55efc4;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .rhythm-canvas {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+            border-radius: 20px;
+            margin: 0 auto;
+            display: block;
+            border: 5px solid #55efc4;
+        }
+
+        .game-instructions {
+            background: #e6fffa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #00b894;
+        }
+
+        .key-display {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .key-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            border: 4px solid white;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .key-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Podcast Player */
+        .podcast-player {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .podcast-cover {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .podcast-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .podcast-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .play-podcast-btn {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .play-podcast-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(85, 239, 196, 0.4);
+        }
+
+        .podcast-transcript {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+
+        /* Ask Anything */
+        .ask-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ask-form {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: #55efc4;
+            outline: none;
+        }
+
+        .submit-question-btn {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-question-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(85, 239, 196, 0.4);
+        }
+
+        .faq-section {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            border-left: 5px solid #55efc4;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #00b894;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Content Creation */
+        .create-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .creation-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 3px solid #cbd5e0;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .tab-btn.active {
+            background: #55efc4;
+            border-color: #00b894;
+            color: white;
+        }
+
+        .creation-area {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        /* Progress Display */
+        .skills-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-name {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #55efc4 0%, #00b894 100%);
+            transition: width 1s ease;
+        }
+
+        .skill-percent {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        /* Back Button */
+        .back-home {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            border: 4px solid #55efc4;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .back-home:hover {
+            transform: scale(1.1);
+            background: #55efc4;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ranger-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .mission-stats {
+                justify-content: center;
+            }
+
+            .phone-simulator {
+                max-width: 100%;
+            }
+
+            .welcome-panel h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="ranger-header">
+        <div class="rank-display" id="rankDisplay">
+            🎯 Junior Ranger
+        </div>
+        <div class="mission-stats">
+            <div class="stat-item">Empathy: <span id="empathyStat">75%</span></div>
+            <div class="stat-item">Courage: <span id="courageStat">60%</span></div>
+            <div class="stat-item">Wisdom: <span id="wisdomStat">80%</span></div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="ranger-station">
+        <!-- Welcome Panel -->
+        <div class="welcome-panel">
+            <h1>🎯 Reality Rangers Station 🎯</h1>
+            <p style="font-size: 1.2rem; color: #4a5568;">Face real-world scenarios and become a champion of respect!</p>
+        </div>
+
+        <!-- Ranger Menu -->
+        <div class="ranger-menu">
+            <button class="ranger-btn" onclick="showMission('scenarios')">
+                <span class="icon">📱</span>
+                Real Scenarios
+            </button>
+            <button class="ranger-btn" onclick="showMission('rhythm')">
+                <span class="icon">🎵</span>
+                Rhythm Games
+            </button>
+            <button class="ranger-btn" onclick="showMission('podcast')">
+                <span class="icon">🎙️</span>
+                Rangers Radio
+            </button>
+            <button class="ranger-btn" onclick="showMission('ask')">
+                <span class="icon">❓</span>
+                Ask Anything
+            </button>
+            <button class="ranger-btn" onclick="showMission('create')">
+                <span class="icon">✍️</span>
+                Create Content
+            </button>
+        </div>
+
+        <!-- Real Scenarios Mission -->
+        <div id="scenarios" class="mission-area">
+            <div class="scenario-container">
+                <h2 class="scenario-title">The Group Chat</h2>
+                <div class="phone-simulator">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen" id="phoneScreen">
+                        <div class="chat-header">Friend Group Chat</div>
+                        <div id="messagesContainer">
+                            <!-- Messages loaded by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rhythm Game Mission -->
+        <div id="rhythm" class="mission-area">
+            <div class="rhythm-game">
+                <h2 class="game-title">🎵 Consent Beat 🎵</h2>
+                <div class="game-instructions">
+                    <strong>How to Play:</strong> Press the keys when the notes reach the bottom! Learn important phrases about consent and boundaries.
+                </div>
+                <div class="rhythm-score">Score: <span id="rhythmScore">0</span> | Combo: <span id="rhythmCombo">0</span>x</div>
+                <canvas id="rhythmCanvas" class="rhythm-canvas"></canvas>
+                <div class="key-display">
+                    <div class="key-btn" style="background: #FFD93D;" data-key="A">A</div>
+                    <div class="key-btn" style="background: #74b9ff;" data-key="S">S</div>
+                    <div class="key-btn" style="background: #55efc4;" data-key="K">K</div>
+                    <div class="key-btn" style="background: #fd79a8;" data-key="L">L</div>
+                </div>
+                <button class="play-podcast-btn" onclick="startRhythmGame()" id="startRhythmBtn" style="margin-top: 2rem;">
+                    Start Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Rangers Radio Mission -->
+        <div id="podcast" class="mission-area">
+            <div class="podcast-player">
+                <h2 class="scenario-title">🎙️ Rangers Radio: Real Stories 🎙️</h2>
+                <div class="podcast-cover">🎧</div>
+                <h3 class="podcast-title">Episode 1: I Stood Up to a Bully</h3>
+                <div class="podcast-controls">
+                    <button class="play-podcast-btn" onclick="togglePodcast()" id="podcastBtn">
+                        ▶️ Play Episode
+                    </button>
+                </div>
+                <div class="podcast-transcript">
+                    <h4 style="margin-bottom: 1rem; color: #00b894;">Episode Transcript:</h4>
+                    <p style="margin-bottom: 1rem;"><strong>Host:</strong> Welcome to Rangers Radio! Today we're talking to Maya, a 10-year-old who stood up to bullying at her school.</p>
+                    <p style="margin-bottom: 1rem;"><strong>Maya:</strong> Hi everyone! I want to share my story because I know others might be going through the same thing.</p>
+                    <p style="margin-bottom: 1rem;"><strong>Host:</strong> Maya, tell us what happened.</p>
+                    <p style="margin-bottom: 1rem;"><strong>Maya:</strong> There was this kid in my class who kept saying mean things to another student. At first, I didn't know what to do. I was scared.</p>
+                    <p style="margin-bottom: 1rem;"><strong>Host:</strong> That's really brave to admit. What did you do?</p>
+                    <p style="margin-bottom: 1rem;"><strong>Maya:</strong> I remembered what I learned about standing up for others. I went to my teacher and told them what was happening. The teacher thanked me and helped stop the bullying.</p>
+                    <p style="margin-bottom: 1rem;"><strong>Host:</strong> That's amazing, Maya! You showed real courage. What would you tell other kids listening?</p>
+                    <p style="margin-bottom: 1rem;"><strong>Maya:</strong> It's okay to be scared, but you can still do the right thing. Talk to a trusted adult. You might save someone from a lot of hurt.</p>
+                    <p><strong>Host:</strong> Thank you, Maya, for sharing your story. Remember Rangers, you all have the power to make a difference!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ask Anything Mission -->
+        <div id="ask" class="mission-area">
+            <div class="ask-container">
+                <h2 class="scenario-title">❓ Ask Anything (Safe & Anonymous) ❓</h2>
+                <div class="ask-form">
+                    <label class="form-label">Your Question (Anonymous):</label>
+                    <textarea class="form-textarea" id="askQuestion" placeholder="Ask anything about respect, safety, boundaries, feelings, or relationships..."></textarea>
+                    
+                    <label class="form-label">Category:</label>
+                    <select class="form-select" id="askCategory">
+                        <option value="">Select a category</option>
+                        <option value="family">Family</option>
+                        <option value="friends">Friends</option>
+                        <option value="school">School</option>
+                        <option value="body">Body & Boundaries</option>
+                        <option value="feelings">Feelings</option>
+                        <option value="safety">Safety</option>
+                    </select>
+                    
+                    <button class="submit-question-btn" onclick="submitQuestion()">Submit Question</button>
+                    <p style="margin-top: 1rem; color: #718096; font-size: 0.9rem;">
+                        ℹ️ Your question is completely anonymous. A counselor will review it and provide a helpful answer.
+                    </p>
+                </div>
+
+                <div class="faq-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #00b894;">Frequently Asked Questions:</h3>
+                    <div class="faq-item">
+                        <div class="faq-question">What if someone touches me in a way that makes me uncomfortable?</div>
+                        <div class="faq-answer">Tell a trusted adult immediately. Your body belongs to you, and you have the right to say no to any touch. It's NEVER your fault if someone touches you inappropriately. Talk to a parent, teacher, counselor, or call a helpline.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I know if my friendship is healthy?</div>
+                        <div class="faq-answer">Healthy friendships make you feel good about yourself. Friends should respect your boundaries, support you, and treat you kindly. If a friendship makes you feel bad, scared, or controlled, talk to a trusted adult.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What is consent and why does it matter?</div>
+                        <div class="faq-answer">Consent means getting permission before doing something that affects another person. It matters because everyone deserves to have their choices and boundaries respected. Always ask before hugging, borrowing things, or any physical contact.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What if I see someone being bullied online?</div>
+                        <div class="faq-answer">Don't join in or stay silent. You can: 1) Tell the person being bullied you support them, 2) Report the bullying to the platform, 3) Tell a trusted adult, 4) Screenshot evidence if safe to do so. Being a good digital citizen means standing up for others online too.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Content Mission -->
+        <div id="create" class="mission-area">
+            <div class="create-container">
+                <h2 class="scenario-title">✍️ Create Your Own Content ✍️</h2>
+                
+                <div class="creation-tabs">
+                    <button class="tab-btn active" onclick="switchTab('story')">Write a Story</button>
+                    <button class="tab-btn" onclick="switchTab('poster')">Design a Poster</button>
+                    <button class="tab-btn" onclick="switchTab('poem')">Write a Poem</button>
+                </div>
+
+                <div class="creation-area" id="creationArea">
+                    <label class="form-label">Your Story Title:</label>
+                    <input type="text" class="form-input" id="storyTitle" placeholder="Give your story a title...">
+                    
+                    <label class="form-label">Write Your Story:</label>
+                    <textarea class="form-textarea" id="storyContent" placeholder="Write about respect, kindness, standing up for others, or your own experiences..." style="min-height: 300px;"></textarea>
+                    
+                    <button class="submit-question-btn" onclick="saveContent()">Save My Creation</button>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #e6fffa; border-radius: 15px; border-left: 5px solid #00b894;">
+                    <strong>💡 Tips for Great Content:</strong>
+                    <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                        <li>Share what you've learned about respect and kindness</li>
+                        <li>Tell stories that could help other kids</li>
+                        <li>Be honest about your feelings and experiences</li>
+                        <li>Remember: your voice matters and can make a difference!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
-  
-  <nav class="ranger-menu">
-    <button>Real Scenarios</button>
-    <button>Rhythm Games</button>
-    <button>Rangers Radio</button>
-    <button>Ask Anything</button>
-    <button>Create Content</button>
-  </nav>
-  
-  <main class="mission-area"></main>
- </div>
+
+    <!-- Back to Home -->
+    <a href="index.html" class="back-home">🏠 Home</a>
+
+    <script>
+        // Scenario Data
+        const groupChatScenario = {
+            messages: [
+                { from: "Alex", text: "Did you see what Maya wore today? LOL 😂", time: "3:45 PM" },
+                { from: "Jordan", text: "Yeah so weird haha", time: "3:46 PM" },
+                { from: "System", text: "What do you do?", time: "NOW", isChoice: true }
+            ],
+            choices: [
+                {
+                    text: "Join in the laughing 😆",
+                    outcome: "negative",
+                    skills: { empathy: -5, respect: -3 },
+                    result: "The bullying continued and Maya saw the messages. She felt terrible and alone. Cyberbullying hurts just as much as in-person bullying."
+                },
+                {
+                    text: "Say 'That's mean, stop it' 🛑",
+                    outcome: "positive",
+                    skills: { courage: 5, respect: 3 },
+                    result: "Your friends paused and realized they were being hurtful. Alex apologized and they stopped. You showed real courage!"
+                },
+                {
+                    text: "Leave the group and tell a trusted adult 🚨",
+                    outcome: "best",
+                    skills: { courage: 8, wisdom: 5 },
+                    result: "You protected Maya and got help from an adult. The bullying was stopped and Maya thanked you. You made the brave choice!"
+                },
+                {
+                    text: "Say nothing and keep scrolling 📱",
+                    outcome: "passive",
+                    skills: { courage: -2 },
+                    result: "The bullying continued. Sometimes silence can hurt too. It's important to stand up or get help when you see bullying."
+                }
+            ]
+        };
+
+        let scenarioChoice = null;
+
+        // Initialize Scenario
+        function initScenario() {
+            const container = document.getElementById('messagesContainer');
+            container.innerHTML = '';
+
+            groupChatScenario.messages.forEach(msg => {
+                if (msg.isChoice) {
+                    let choiceHTML = `
+                        <div class="choice-prompt">
+                            <div class="choice-prompt-text">${msg.text}</div>
+                            <div class="scenario-choices">
+                    `;
+                    
+                    groupChatScenario.choices.forEach((choice, index) => {
+                        choiceHTML += `
+                            <div class="scenario-choice" onclick="makeScenarioChoice(${index})">
+                                ${choice.text}
+                            </div>
+                        `;
+                    });
+                    
+                    choiceHTML += `</div></div>`;
+                    container.innerHTML += choiceHTML;
+                } else {
+                    container.innerHTML += `
+                        <div class="message">
+                            <div class="message-sender">${msg.from}</div>
+                            <div>${msg.text}</div>
+                            <div class="message-time">${msg.time}</div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function makeScenarioChoice(index) {
+            const choice = groupChatScenario.choices[index];
+            scenarioChoice = choice;
+            
+            // Show result
+            alert(`Result: ${choice.result}\n\nOutcome: ${choice.outcome.toUpperCase()}`);
+            
+            // Update skills
+            updateSkills(choice.skills);
+            
+            // Record activity
+            recordActivity({
+                type: 'scenario',
+                name: 'The Group Chat',
+                choice: choice.text,
+                outcome: choice.outcome,
+                completed: true
+            });
+        }
+
+        // Rhythm Game
+        let rhythmCanvas, rhythmCtx;
+        let rhythmScore = 0;
+        let rhythmCombo = 0;
+        let notes = [];
+        let gameActive = false;
+
+        const consentPhrases = [
+            { text: "Can I borrow this?", key: "A" },
+            { text: "Is this okay?", key: "S" },
+            { text: "What do you think?", key: "K" },
+            { text: "I respect your choice", key: "L" },
+            { text: "May I join you?", key: "A" },
+            { text: "Do you need space?", key: "S" },
+            { text: "Let me know!", key: "K" },
+            { text: "Your feelings matter", key: "L" }
+        ];
+
+        function startRhythmGame() {
+            if (gameActive) return;
+            
+            rhythmCanvas = document.getElementById('rhythmCanvas');
+            rhythmCtx = rhythmCanvas.getContext('2d');
+            rhythmCanvas.width = 800;
+            rhythmCanvas.height = 600;
+            
+            rhythmScore = 0;
+            rhythmCombo = 0;
+            notes = [];
+            gameActive = true;
+            
+            document.getElementById('startRhythmBtn').textContent = 'Game Running...';
+            document.getElementById('startRhythmBtn').disabled = true;
+            
+            // Generate notes
+            consentPhrases.forEach((phrase, index) => {
+                notes.push({
+                    key: phrase.key,
+                    phrase: phrase.text,
+                    y: -50 - (index * 150),
+                    hit: false,
+                    lane: phrase.key === 'A' ? 0 : phrase.key === 'S' ? 1 : phrase.key === 'K' ? 2 : 3
+                });
+            });
+            
+            // Add keyboard listener
+            document.addEventListener('keydown', handleRhythmKey);
+            
+            rhythmGameLoop();
+        }
+
+        function rhythmGameLoop() {
+            if (!gameActive) return;
+            
+            rhythmCtx.clearRect(0, 0, rhythmCanvas.width, rhythmCanvas.height);
+            
+            // Draw lanes
+            const laneWidth = 200;
+            const colors = ['#FFD93D', '#74b9ff', '#55efc4', '#fd79a8'];
+            for (let i = 0; i < 4; i++) {
+                rhythmCtx.fillStyle = colors[i];
+                rhythmCtx.globalAlpha = 0.3;
+                rhythmCtx.fillRect(i * laneWidth, 0, laneWidth, 600);
+                rhythmCtx.globalAlpha = 1;
+            }
+            
+            // Draw target zone
+            rhythmCtx.fillStyle = 'white';
+            rhythmCtx.fillRect(0, 520, 800, 60);
+            
+            // Draw and update notes
+            let allNotesGone = true;
+            notes.forEach(note => {
+                if (!note.hit) {
+                    allNotesGone = false;
+                    note.y += 2;
+                    
+                    // Draw note
+                    rhythmCtx.fillStyle = colors[note.lane];
+                    rhythmCtx.fillRect(note.lane * 200 + 50, note.y, 100, 40);
+                    rhythmCtx.fillStyle = 'white';
+                    rhythmCtx.font = '12px Arial';
+                    rhythmCtx.textAlign = 'center';
+                    rhythmCtx.fillText(note.phrase, note.lane * 200 + 100, note.y + 25);
+                    
+                    // Check if missed
+                    if (note.y > 600) {
+                        note.hit = true;
+                        rhythmCombo = 0;
+                    }
+                }
+            });
+            
+            if (allNotesGone) {
+                endRhythmGame();
+                return;
+            }
+            
+            requestAnimationFrame(rhythmGameLoop);
+        }
+
+        function handleRhythmKey(e) {
+            const key = e.key.toUpperCase();
+            if (!['A', 'S', 'K', 'L'].includes(key)) return;
+            
+            // Find nearest note in this lane
+            const lane = key === 'A' ? 0 : key === 'S' ? 1 : key === 'K' ? 2 : 3;
+            const note = notes.find(n => !n.hit && n.lane === lane && Math.abs(n.y - 540) < 60);
+            
+            if (note) {
+                note.hit = true;
+                const distance = Math.abs(note.y - 540);
+                
+                if (distance < 20) {
+                    rhythmScore += 100;
+                    rhythmCombo++;
+                } else {
+                    rhythmScore += 50;
+                    rhythmCombo++;
+                }
+                
+                updateRhythmScore();
+            }
+        }
+
+        function updateRhythmScore() {
+            document.getElementById('rhythmScore').textContent = rhythmScore;
+            document.getElementById('rhythmCombo').textContent = rhythmCombo;
+        }
+
+        function endRhythmGame() {
+            gameActive = false;
+            document.removeEventListener('keydown', handleRhythmKey);
+            document.getElementById('startRhythmBtn').textContent = 'Play Again';
+            document.getElementById('startRhythmBtn').disabled = false;
+            
+            alert(`Great job! Final Score: ${rhythmScore}\nYou learned ${consentPhrases.length} consent phrases!`);
+            
+            recordActivity({
+                type: 'rhythm_game',
+                name: 'Consent Beat',
+                score: rhythmScore,
+                completed: true
+            });
+        }
+
+        // Podcast Player
+        let podcastPlaying = false;
+
+        function togglePodcast() {
+            const btn = document.getElementById('podcastBtn');
+            if (podcastPlaying) {
+                btn.textContent = '▶️ Play Episode';
+                podcastPlaying = false;
+            } else {
+                btn.textContent = '⏸️ Pause Episode';
+                podcastPlaying = true;
+                
+                // Simulate podcast completion after 5 seconds
+                setTimeout(() => {
+                    if (podcastPlaying) {
+                        btn.textContent = '▶️ Play Episode';
+                        podcastPlaying = false;
+                        alert('Episode complete! Great listening!');
+                        recordActivity({
+                            type: 'podcast',
+                            name: 'Rangers Radio Episode 1',
+                            completed: true
+                        });
+                    }
+                }, 5000);
+            }
+        }
+
+        // Ask Anything
+        function submitQuestion() {
+            const question = document.getElementById('askQuestion').value.trim();
+            const category = document.getElementById('askCategory').value;
+            
+            if (!question) {
+                alert('Please enter a question!');
+                return;
+            }
+            
+            if (!category) {
+                alert('Please select a category!');
+                return;
+            }
+            
+            // Save question
+            const questions = JSON.parse(localStorage.getItem('user_questions') || '[]');
+            questions.push({
+                question,
+                category,
+                timestamp: new Date().toISOString(),
+                answered: false
+            });
+            localStorage.setItem('user_questions', JSON.stringify(questions));
+            
+            alert('Thank you for your question! A counselor will review it and provide an answer soon. Check back later!');
+            document.getElementById('askQuestion').value = '';
+            document.getElementById('askCategory').value = '';
+            
+            recordActivity({
+                type: 'question',
+                name: 'Asked a Question',
+                category: category,
+                completed: true
+            });
+        }
+
+        // Content Creation
+        let currentTab = 'story';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const area = document.getElementById('creationArea');
+            if (tab === 'story') {
+                area.innerHTML = `
+                    <label class="form-label">Your Story Title:</label>
+                    <input type="text" class="form-input" id="storyTitle" placeholder="Give your story a title...">
+                    <label class="form-label">Write Your Story:</label>
+                    <textarea class="form-textarea" id="storyContent" placeholder="Write about respect, kindness, standing up for others, or your own experiences..." style="min-height: 300px;"></textarea>
+                    <button class="submit-question-btn" onclick="saveContent()">Save My Creation</button>
+                `;
+            } else if (tab === 'poster') {
+                area.innerHTML = `
+                    <label class="form-label">Poster Message:</label>
+                    <input type="text" class="form-input" id="posterMessage" placeholder="E.g., 'Respect Everyone' or 'Stand Up to Bullying'">
+                    <label class="form-label">Choose Design:</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="padding: 2rem; background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%); border-radius: 10px; cursor: pointer; text-align: center;" onclick="selectDesign('colorful')">Colorful</div>
+                        <div style="padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; cursor: pointer; text-align: center; color: white;" onclick="selectDesign('bold')">Bold</div>
+                        <div style="padding: 2rem; background: linear-gradient(135deg, #55efc4 0%, #00b894 100%); border-radius: 10px; cursor: pointer; text-align: center; color: white;" onclick="selectDesign('nature')">Nature</div>
+                    </div>
+                    <button class="submit-question-btn" onclick="saveContent()">Save My Poster</button>
+                `;
+            } else if (tab === 'poem') {
+                area.innerHTML = `
+                    <label class="form-label">Poem Title:</label>
+                    <input type="text" class="form-input" id="poemTitle" placeholder="Give your poem a title...">
+                    <label class="form-label">Write Your Poem:</label>
+                    <textarea class="form-textarea" id="poemContent" placeholder="Express your feelings about kindness, respect, or courage..." style="min-height: 300px;"></textarea>
+                    <button class="submit-question-btn" onclick="saveContent()">Save My Poem</button>
+                `;
+            }
+        }
+
+        function saveContent() {
+            let content = {};
+            
+            if (currentTab === 'story') {
+                const title = document.getElementById('storyTitle')?.value.trim();
+                const text = document.getElementById('storyContent')?.value.trim();
+                if (!title || !text) {
+                    alert('Please fill in both title and content!');
+                    return;
+                }
+                content = { type: 'story', title, text };
+            } else if (currentTab === 'poster') {
+                const message = document.getElementById('posterMessage')?.value.trim();
+                if (!message) {
+                    alert('Please enter a poster message!');
+                    return;
+                }
+                content = { type: 'poster', message };
+            } else if (currentTab === 'poem') {
+                const title = document.getElementById('poemTitle')?.value.trim();
+                const text = document.getElementById('poemContent')?.value.trim();
+                if (!title || !text) {
+                    alert('Please fill in both title and poem!');
+                    return;
+                }
+                content = { type: 'poem', title, text };
+            }
+            
+            const creations = JSON.parse(localStorage.getItem('user_creations') || '[]');
+            creations.push({
+                ...content,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('user_creations', JSON.stringify(creations));
+            
+            alert('Your creation has been saved! Great work, Ranger!');
+            
+            recordActivity({
+                type: 'creation',
+                name: `Created ${currentTab}`,
+                completed: true
+            });
+        }
+
+        // Skills Management
+        function updateSkills(changes) {
+            const userId = getUserId();
+            let skills = JSON.parse(localStorage.getItem(`skills_${userId}`) || '{"empathy": 75, "courage": 60, "wisdom": 80}');
+            
+            Object.keys(changes).forEach(skill => {
+                skills[skill] = Math.max(0, Math.min(100, (skills[skill] || 50) + changes[skill]));
+            });
+            
+            localStorage.setItem(`skills_${userId}`, JSON.stringify(skills));
+            updateSkillsDisplay();
+        }
+
+        function updateSkillsDisplay() {
+            const userId = getUserId();
+            let skills = JSON.parse(localStorage.getItem(`skills_${userId}`) || '{"empathy": 75, "courage": 60, "wisdom": 80}');
+            
+            document.getElementById('empathyStat').textContent = skills.empathy + '%';
+            document.getElementById('courageStat').textContent = skills.courage + '%';
+            document.getElementById('wisdomStat').textContent = skills.wisdom + '%';
+            
+            // Update rank
+            const avgSkill = (skills.empathy + skills.courage + skills.wisdom) / 3;
+            let rank = 'Junior Ranger';
+            if (avgSkill >= 80) rank = 'Elite Ranger';
+            else if (avgSkill >= 65) rank = 'Senior Ranger';
+            
+            document.getElementById('rankDisplay').textContent = `🎯 ${rank}`;
+        }
+
+        // Mission Management
+        function showMission(missionName) {
+            document.querySelectorAll('.mission-area').forEach(area => {
+                area.classList.remove('active');
+            });
+
+            const mission = document.getElementById(missionName);
+            mission.classList.add('active');
+
+            // Initialize mission-specific content
+            if (missionName === 'scenarios') {
+                initScenario();
+            }
+        }
+
+        // Progress Tracking
+        function recordActivity(activity) {
+            const userId = getUserId();
+            let progress = JSON.parse(localStorage.getItem(`progress_${userId}`) || '{"activities": []}');
+            
+            progress.activities.push({
+                ...activity,
+                timestamp: new Date().toISOString(),
+                ageGroup: '9-11'
+            });
+            
+            localStorage.setItem(`progress_${userId}`, JSON.stringify(progress));
+        }
+
+        function getUserId() {
+            const user = JSON.parse(localStorage.getItem('emancipation_user') || '{"id": "demo_user"}');
+            return user.id;
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateSkillsDisplay();
+        });
+    </script>
+</body>
+</html>">

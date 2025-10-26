@@ -3,30 +3,783 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ages 12 to 14</title>
+    <title>Truth Tribe - Ages 12-14 | Emancipation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #667eea;
+            --primary-purple-dark: #764ba2;
+            --yellow: #FFD93D;
+            --blue: #74b9ff;
+            --green: #55efc4;
+            --red-accent: #f5576c;
+            --white: #ffffff;
+            --gray-light: #f7fafc;
+            --gray: #4a5568;
+            --gray-dark: #2d3748;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--gray-dark);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: var(--primary-purple);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Tribe Hub Header */
+        .tribe-header {
+            background: linear-gradient(135deg, var(--primary-purple-dark) 0%, var(--primary-purple) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .profile-summary {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-summary span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Main Menu */
+        .tribe-menu {
+            background: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tribe-menu button {
+            background: var(--gray-light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .tribe-menu button:hover,
+        .tribe-menu button.active {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Content Space */
+        .content-space {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+        }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .scenario-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary-purple);
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .scenario-card h3 {
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-tag {
+            display: inline-block;
+            background: var(--primary-purple);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Documentary Cards */
+        .doc-card {
+            background: linear-gradient(135deg, var(--gray-light) 0%, white 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border-top: 4px solid var(--red-accent);
+        }
+
+        .doc-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .doc-icon {
+            font-size: 2.5rem;
+        }
+
+        .play-btn {
+            background: var(--red-accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            font-family: inherit;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Forum Section */
+        .forum-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .forum-category {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .forum-category:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .forum-category h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Peer Activity Sidebar */
+        .peer-activity {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .peer-activity h3 {
+            color: var(--primary-purple);
+            margin-bottom: 1rem;
+        }
+
+        .activity-item {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .activity-item strong {
+            color: var(--primary-purple);
+        }
+
+        /* Crisis Banner */
+        .crisis-banner {
+            background: var(--red-accent);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .crisis-banner a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gray-light);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .choice-btn {
+            display: block;
+            width: 100%;
+            background: var(--gray-light);
+            border: 2px solid transparent;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .choice-btn:hover {
+            border-color: var(--primary-purple);
+            background: white;
+        }
+
+        /* Resources Section */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .resource-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .resource-card h4 {
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--red-accent);
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-space {
+                grid-template-columns: 1fr;
+            }
+
+            .peer-activity {
+                order: -1;
+            }
+
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="tribe class">
-        <header class="tribe-header">
-            <div class="profile summary">
-                <span>Truth Seeker</span>
-                <span>Impact Score: 450</span>
-            </div>
-
-            <div class="tribe menu">
-                <button>Real Talk</button>
-                <button>Interactive Documents</button>
-                <button>Teen created</button>
-                <button>Discussion Forum</button>
-                <button>Resources</button>
-            </div>
-
-            <main class="content space"></main>
-
-            <aside class="peer activity">
-                <h2>Tribe Activity</h2>
-            </aside>
-        </header>
+    <!-- Crisis Banner -->
+    <div class="crisis-banner">
+        🆘 Need immediate help? <a href="../pages/crisis.html">Click here for crisis resources</a> - You're not alone.
     </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <span>🕊️</span>
+                Emancipation
+            </a>
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Tribe Header -->
+    <div class="tribe-header">
+        <h1>Truth Tribe 🎭</h1>
+        <p>Ages 12-14 | Gender Awareness & Courage</p>
+        <div class="profile-summary">
+            <span>🏆 Truth Seeker</span>
+            <span>⭐ Impact Score: 450</span>
+            <span>🔥 7 Day Streak</span>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div class="tribe-menu">
+        <button class="active" data-section="real-talk">Real Talk</button>
+        <button data-section="documentaries">Interactive Docs</button>
+        <button data-section="teen-created">Teen Created</button>
+        <button data-section="forum">Discussion Forum</button>
+        <button data-section="resources">Resources</button>
+    </div>
+
+    <!-- Content Space -->
+    <div class="content-space">
+        <div class="main-content">
+            <!-- Real Talk Section (Default) -->
+            <div id="real-talk" class="content-section">
+                <h2>Real Talk: Choose Your Story</h2>
+                <p style="color: var(--gray); margin: 1rem 0;">Complex scenarios where your choices matter. These stories explore real issues teens face.</p>
+                
+                <div class="scenario-grid">
+                    <div class="scenario-card" data-scenario="party">
+                        <h3>The Party Dilemma</h3>
+                        <p>Your friend invites you to a party with older kids. Things get uncomfortable...</p>
+                        <span class="scenario-tag">Peer Pressure</span>
+                        <span class="scenario-tag">Safety</span>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="relationship">
+                        <h3>Relationship Red Flags</h3>
+                        <p>Your friend's new partner is showing controlling behavior...</p>
+                        <span class="scenario-tag">Toxic Relationships</span>
+                        <span class="scenario-tag">Warning Signs</span>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="screenshot">
+                        <h3>The Screenshot</h3>
+                        <p>A private photo is being shared without consent...</p>
+                        <span class="scenario-tag">Digital Abuse</span>
+                        <span class="scenario-tag">Consent</span>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="home">
+                        <h3>Home Life</h3>
+                        <p>You witness concerning behavior between family members...</p>
+                        <span class="scenario-tag">Domestic Violence</span>
+                        <span class="scenario-tag">Support</span>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="gender">
+                        <h3>Breaking Stereotypes</h3>
+                        <p>Someone is being judged for their interests and expression...</p>
+                        <span class="scenario-tag">Gender Equality</span>
+                        <span class="scenario-tag">Self-Expression</span>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="consent">
+                        <h3>The Consent Conversation</h3>
+                        <p>Navigate real conversations about boundaries and respect...</p>
+                        <span class="scenario-tag">Consent</span>
+                        <span class="scenario-tag">Communication</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentaries Section -->
+            <div id="documentaries" class="content-section hidden">
+                <h2>Interactive Documentaries</h2>
+                <p style="color: var(--gray); margin: 1rem 0;">Watch, learn, and engage with real stories and expert insights.</p>
+
+                <div class="doc-card">
+                    <div class="doc-header">
+                        <div class="doc-icon">📹</div>
+                        <div>
+                            <h3>The Truth About Consent</h3>
+                            <p>10 minutes | Quiz included</p>
+                        </div>
+                    </div>
+                    <p>Understanding consent in all its forms - from simple interactions to complex situations.</p>
+                    <button class="play-btn" onclick="alert('Video player would load here. For demo: This would be an embedded video with pause points for quiz questions.')">▶ Watch Now</button>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-header">
+                        <div class="doc-icon">🛡️</div>
+                        <div>
+                            <h3>Recognizing Abuse</h3>
+                            <p>12 minutes | Resource guide included</p>
+                        </div>
+                    </div>
+                    <p>Learn to identify physical, emotional, sexual, and digital abuse - and how to get help.</p>
+                    <button class="play-btn" onclick="alert('Video player would load here.')">▶ Watch Now</button>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-header">
+                        <div class="doc-icon">💚</div>
+                        <div>
+                            <h3>Healthy Relationships</h3>
+                            <p>10 minutes | Interactive exercises</p>
+                        </div>
+                    </div>
+                    <p>What healthy relationships look like, communication skills, and setting boundaries.</p>
+                    <button class="play-btn" onclick="alert('Video player would load here.')">▶ Watch Now</button>
+                </div>
+            </div>
+
+            <!-- Teen Created Section -->
+            <div id="teen-created" class="content-section hidden">
+                <h2>Teen Created Content</h2>
+                <p style="color: var(--gray); margin: 1rem 0;">Share your voice. Create change. All content is moderated for safety.</p>
+
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                    <h3>Share Your Story</h3>
+                    <form id="teen-content-form">
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Content Type:</label>
+                            <select style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 2px solid var(--gray-light);">
+                                <option>Written Story/Essay</option>
+                                <option>Artwork Description</option>
+                                <option>Poem</option>
+                                <option>PSA Idea</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Title:</label>
+                            <input type="text" placeholder="Give your content a title" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 2px solid var(--gray-light);">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your Content:</label>
+                            <textarea rows="8" placeholder="Share your thoughts, story, or message..." style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 2px solid var(--gray-light); font-family: inherit;"></textarea>
+                        </div>
+                        <button type="submit" class="play-btn" style="width: 100%;">Submit for Review</button>
+                    </form>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Recent Community Content</h3>
+                <div class="scenario-grid" style="margin-top: 1rem;">
+                    <div class="scenario-card">
+                        <h3>Why I Speak Up Now</h3>
+                        <p style="font-style: italic;">"After learning about bystander intervention, I helped a friend who was in a controlling relationship..."</p>
+                        <span class="scenario-tag">⭐ Featured</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forum Section -->
+            <div id="forum" class="content-section hidden">
+                <h2>Discussion Forum</h2>
+                <p style="color: var(--gray); margin: 1rem 0;">Safe, moderated space to discuss, ask questions, and support each other.</p>
+
+                <div class="forum-categories">
+                    <div class="forum-category">
+                        <h3>💬 General Discussion</h3>
+                        <p>Talk about anything related to respect, relationships, and safety</p>
+                    </div>
+                    <div class="forum-category">
+                        <h3>❓ Ask for Advice</h3>
+                        <p>Get support from peers (all posts are anonymous and moderated)</p>
+                    </div>
+                    <div class="forum-category">
+                        <h3>📖 Share Your Story</h3>
+                        <p>Your experiences can help others</p>
+                    </div>
+                    <div class="forum-category">
+                        <h3>🎯 School Campaigns</h3>
+                        <p>Organize and share respect initiatives at your school</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Section -->
+            <div id="resources" class="content-section hidden">
+                <h2>Crisis Resources & Support</h2>
+                <p style="color: var(--gray); margin: 1rem 0;">Immediate help is always available. These resources are confidential and free.</p>
+
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h4>🆘 Sexual Assault Hotline</h4>
+                        <div class="resource-number">1-800-656-4673</div>
+                        <p>24/7 Confidential Support</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>💬 Crisis Text Line</h4>
+                        <div class="resource-number">Text HOME to 741741</div>
+                        <p>24/7 Text Support</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>🏠 Domestic Violence Hotline</h4>
+                        <div class="resource-number">1-800-799-7233</div>
+                        <p>24/7 Support & Resources</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>🌈 Trevor Project</h4>
+                        <div class="resource-number">1-866-488-7386</div>
+                        <p>LGBTQ+ Youth Support</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 15px; margin-top: 2rem;">
+                    <h3>📚 Educational Library</h3>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">Understanding Healthy Relationships</li>
+                        <li style="margin-bottom: 0.5rem;">Digital Safety & Privacy Guide</li>
+                        <li style="margin-bottom: 0.5rem;">Your Legal Rights as a Minor</li>
+                        <li style="margin-bottom: 0.5rem;">Supporting a Friend in Crisis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Peer Activity Sidebar -->
+        <aside class="peer-activity">
+            <h3>🌟 Tribe Activity</h3>
+            
+            <div class="activity-item">
+                <strong>@SkyWalker</strong> completed "The Party Dilemma" - Made brave choices!
+            </div>
+
+            <div class="activity-item">
+                <strong>@PhoenixRising</strong> earned the "Truth Seeker" badge
+            </div>
+
+            <div class="activity-item">
+                <strong>@OceanWave</strong> shared a story in Teen Created
+            </div>
+
+            <div style="background: var(--primary-purple); color: white; padding: 1rem; border-radius: 10px; margin-top: 1.5rem; text-align: center;">
+                <strong>Community Impact</strong>
+                <p style="font-size: 2rem; margin: 0.5rem 0;">1,234</p>
+                <p style="font-size: 0.9rem;">Stories completed this week</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scenario Modal -->
+    <div id="scenario-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div id="scenario-content">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu Navigation
+        document.querySelectorAll('.tribe-menu button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.tribe-menu button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Hide all sections
+                document.querySelectorAll('.content-section').forEach(section => section.classList.add('hidden'));
+
+                // Show selected section
+                const sectionId = button.dataset.section;
+                document.getElementById(sectionId).classList.remove('hidden');
+            });
+        });
+
+        // Scenario Click Handlers
+        document.querySelectorAll('.scenario-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const scenario = card.dataset.scenario;
+                loadScenario(scenario);
+            });
+        });
+
+        // Load Scenario into Modal
+        function loadScenario(scenarioType) {
+            const scenarios = {
+                party: {
+                    title: "The Party Dilemma",
+                    intro: "You arrive at your friend's party. The music is loud, and you notice some older teens in the kitchen with alcohol. Your friend pulls you aside, looking nervous.",
+                    image: "🎉",
+                    choices: [
+                        { text: "Stay and keep an eye on your friend", id: "stay" },
+                        { text: "Leave immediately and text your parents", id: "leave" },
+                        { text: "Try to convince your friend to leave with you", id: "convince" },
+                        { text: "Call a trusted adult for advice", id: "call" }
+                    ]
+                },
+                relationship: {
+                    title: "Relationship Red Flags",
+                    intro: "Your friend Alex has been dating someone new. Lately, Alex seems withdrawn and always checks their phone nervously. You notice their partner constantly texts asking where they are.",
+                    image: "❤️‍🩹",
+                    choices: [
+                        { text: "Talk to Alex privately about your concerns", id: "talk" },
+                        { text: "Research warning signs of unhealthy relationships", id: "research" },
+                        { text: "Suggest Alex speak to a counselor", id: "counselor" },
+                        { text: "Stay out of it - it's their relationship", id: "ignore" }
+                    ]
+                },
+                screenshot: {
+                    title: "The Screenshot",
+                    intro: "You hear that someone shared a private photo of a classmate without permission. The photo is spreading through group chats at school.",
+                    image: "📱",
+                    choices: [
+                        { text: "Report it to a trusted adult immediately", id: "report" },
+                        { text: "Reach out to the person affected to offer support", id: "support" },
+                        { text: "Refuse to look at or share the image", id: "refuse" },
+                        { text: "All of the above", id: "all" }
+                    ]
+                }
+            };
+
+            const scenario = scenarios[scenarioType] || scenarios.party;
+            
+            document.getElementById('scenario-content').innerHTML = `
+                <div style="text-align: center; font-size: 4rem; margin: 1rem 0;">${scenario.image}</div>
+                <h2>${scenario.title}</h2>
+                <p style="font-size: 1.1rem; margin: 1.5rem 0; line-height: 1.6;">${scenario.intro}</p>
+                <h3 style="margin: 2rem 0 1rem;">What do you do?</h3>
+                ${scenario.choices.map(choice => `
+                    <button class="choice-btn" onclick="makeChoice('${choice.id}', '${scenarioType}')">
+                        ${choice.text}
+                    </button>
+                `).join('')}
+            `;
+
+            document.getElementById('scenario-modal').classList.add('active');
+        }
+
+        function makeChoice(choiceId, scenario) {
+            // In production: This would track the choice and update the moral growth tracker
+            const outcomes = {
+                stay: "You stayed to support your friend. This shows loyalty, but remember to also prioritize your own safety.",
+                leave: "You made a safe choice by leaving. It's always okay to remove yourself from uncomfortable situations.",
+                convince: "Great leadership! Helping friends make good decisions is what real friendship is about.",
+                call: "Excellent decision! Asking for guidance from trusted adults shows maturity.",
+                talk: "Perfect approach. Real friends have difficult conversations when they're concerned.",
+                report: "You did the right thing. Reporting digital abuse helps protect victims.",
+                all: "Outstanding! Taking multiple actions shows comprehensive support and understanding."
+            };
+
+            alert(outcomes[choiceId] || "You've made your choice. Every decision teaches us something.");
+            
+            // Track progress (would connect to progress-tracker.js in production)
+            console.log(`Choice made: ${choiceId} in scenario: ${scenario}`);
+            
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById('scenario-modal').classList.remove('active');
+        }
+
+        // Teen Content Form
+        document.getElementById('teen-content-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for sharing! Your content will be reviewed within 48 hours and posted if approved. Your voice matters!');
+            e.target.reset();
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('scenario-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'scenario-modal') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>

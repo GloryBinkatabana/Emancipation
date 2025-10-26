@@ -1,18 +1,1102 @@
-<!--
-<div class="kingdom-container">
-  <header class="kingdom-header">
-    <div class="mascot-welcome">Emmy the Dove</div>
-    <div class="progress-stars">★★☆☆☆</div>
-  </header>
-  
-  <nav class="activity-menu">
-    <button>Stories</button>
-    <button>Games</button>
-    <button>Songs</button>
-    <button>Coloring</button>
-  </nav>
-  
-  <main class="activity-space"></main>
-  
-  <footer class="reflection-moment"></footer>
- </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindness Kingdom - Ages 3-5 | Emancipation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 100%);
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* Navigation for Kids */
+        .kingdom-header {
+            background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .mascot-welcome {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .progress-stars {
+            font-size: 2rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Container */
+        .kingdom-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-message {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-message h1 {
+            font-size: 2.5rem;
+            color: #fd79a8;
+            margin-bottom: 1rem;
+        }
+
+        /* Activity Menu */
+        .activity-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .activity-btn {
+            background: white;
+            border: 5px solid #FFD93D;
+            border-radius: 25px;
+            padding: 2rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .activity-btn:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-btn .icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Activity Space */
+        .activity-space {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .activity-space.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Story Viewer */
+        .story-container {
+            text-align: center;
+        }
+
+        .story-scene {
+            background: #f7fafc;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .story-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #2d3748;
+            max-width: 600px;
+        }
+
+        .story-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .story-btn {
+            background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .story-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(253, 121, 168, 0.4);
+        }
+
+        .story-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Choice Buttons */
+        .choice-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .choice-btn {
+            background: white;
+            border: 4px solid #FFD93D;
+            padding: 1.5rem;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 200px;
+        }
+
+        .choice-btn:hover {
+            background: #FFD93D;
+            transform: scale(1.05);
+        }
+
+        /* Games */
+        .game-canvas {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: #f7fafc;
+            border-radius: 20px;
+            margin: 0 auto;
+            display: block;
+            border: 5px solid #FFD93D;
+        }
+
+        .game-instructions {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+        }
+
+        .game-score {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fd79a8;
+            font-weight: bold;
+        }
+
+        /* Songs */
+        .song-player {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .song-title {
+            font-size: 2rem;
+            color: #fd79a8;
+            margin-bottom: 2rem;
+        }
+
+        .lyrics-display {
+            font-size: 1.5rem;
+            line-height: 2;
+            color: #2d3748;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lyrics-line {
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Coloring Activity */
+        .coloring-container {
+            text-align: center;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 4px solid white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-btn:hover,
+        .color-btn.selected {
+            transform: scale(1.2);
+            border-color: #2d3748;
+        }
+
+        /* Reflection Modal */
+        .reflection-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .reflection-modal.active {
+            display: flex;
+        }
+
+        .reflection-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            max-width: 500px;
+            text-align: center;
+            animation: bounceIn 0.5s ease;
+        }
+
+        .reflection-content .emmy-mascot {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .reflection-question {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #2d3748;
+        }
+
+        .emoji-choices {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .emoji-btn {
+            font-size: 4rem;
+            background: none;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .emoji-btn:hover,
+        .emoji-btn.selected {
+            border-color: #FFD93D;
+            background: rgba(255, 217, 61, 0.1);
+            transform: scale(1.2);
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+
+        .continue-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Back Button */
+        .back-home {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            border: 4px solid #fd79a8;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            transform: scale(1.1);
+            background: #fd79a8;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .kingdom-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .welcome-message h1 {
+                font-size: 1.8rem;
+            }
+
+            .story-text {
+                font-size: 1.2rem;
+            }
+
+            .game-canvas {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="kingdom-header">
+        <div class="mascot-welcome">
+            🕊️ Emmy's Kindness Kingdom
+        </div>
+        <div class="progress-stars" id="progressStars">
+            ⭐⭐⭐☆☆
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="kingdom-container">
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <h1>Welcome to Kindness Kingdom! 🌈</h1>
+            <p style="font-size: 1.3rem;">Let's learn about sharing, caring, and being kind to everyone!</p>
+        </div>
+
+        <!-- Activity Menu -->
+        <div class="activity-menu">
+            <button class="activity-btn" onclick="showActivity('stories')">
+                <span class="icon">📚</span>
+                Stories
+            </button>
+            <button class="activity-btn" onclick="showActivity('games')">
+                <span class="icon">🎮</span>
+                Games
+            </button>
+            <button class="activity-btn" onclick="showActivity('songs')">
+                <span class="icon">🎵</span>
+                Songs
+            </button>
+            <button class="activity-btn" onclick="showActivity('coloring')">
+                <span class="icon">🎨</span>
+                Coloring
+            </button>
+        </div>
+
+        <!-- Stories Activity -->
+        <div id="stories" class="activity-space">
+            <div class="story-container">
+                <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #fd79a8;">
+                    📖 Lulu and the Lost Toy
+                </h2>
+                <div class="story-scene" id="storyScene">
+                    <div class="story-image" id="storyImage">🧸</div>
+                    <div class="story-text" id="storyText">
+                        Loading story...
+                    </div>
+                </div>
+                <div class="story-controls" id="storyControls">
+                    <button class="story-btn" onclick="previousScene()" id="prevBtn">⬅️ Back</button>
+                    <button class="story-btn" onclick="nextScene()" id="nextBtn">Next ➡️</button>
+                </div>
+                <div class="choice-container" id="choiceContainer"></div>
+            </div>
+        </div>
+
+        <!-- Games Activity -->
+        <div id="games" class="activity-space">
+            <div class="game-instructions">
+                🎯 Drag the toys to share with your friends! 🎯
+            </div>
+            <div class="game-score" id="gameScore">Stars: ⭐ 0</div>
+            <canvas id="gameCanvas" class="game-canvas"></canvas>
+        </div>
+
+        <!-- Songs Activity -->
+        <div id="songs" class="activity-space">
+            <div class="song-player">
+                <h2 class="song-title">🎵 The Kindness Song 🎵</h2>
+                <div class="lyrics-display" id="lyricsDisplay">
+                    Click play to start the song!
+                </div>
+                <button class="play-btn" onclick="playSong()" id="playSongBtn">
+                    ▶️ Play Song
+                </button>
+            </div>
+        </div>
+
+        <!-- Coloring Activity -->
+        <div id="coloring" class="activity-space">
+            <div class="coloring-container">
+                <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #fd79a8;">
+                    🎨 Color Emmy and Friends! 🎨
+                </h2>
+                <div class="color-palette" id="colorPalette">
+                    <!-- Colors will be added by JavaScript -->
+                </div>
+                <canvas id="coloringCanvas" class="game-canvas"></canvas>
+                <button class="story-btn" onclick="saveColoring()" style="margin-top: 1.5rem;">
+                    💾 Save My Art!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reflection Modal -->
+    <div class="reflection-modal" id="reflectionModal">
+        <div class="reflection-content">
+            <div class="emmy-mascot">🕊️</div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Let's Think About This!</h3>
+            <p class="reflection-question" id="reflectionQuestion">
+                How did that make you feel?
+            </p>
+            <div class="emoji-choices">
+                <button class="emoji-btn" data-feeling="happy" onclick="selectFeeling(this)">😊</button>
+                <button class="emoji-btn" data-feeling="thinking" onclick="selectFeeling(this)">🤔</button>
+                <button class="emoji-btn" data-feeling="learned" onclick="selectFeeling(this)">⭐</button>
+            </div>
+            <button class="continue-btn" onclick="closeReflection()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Back to Home -->
+    <a href="index.html" class="back-home">🏠 Home</a>
+
+    <script>
+        // Story Data
+        const stories = {
+            luluStory: [
+                {
+                    image: "🧸",
+                    text: "Lulu found a toy on the playground. It was so pretty!",
+                    audio: null
+                },
+                {
+                    image: "🤔",
+                    text: "But wait... this toy doesn't belong to Lulu. What should she do?",
+                    audio: null
+                },
+                {
+                    image: "❓",
+                    text: "Lulu has two choices. She could keep the toy, or find its owner.",
+                    audio: null,
+                    hasChoice: true,
+                    choices: [
+                        { text: "Keep the toy 🧸", outcome: "keep", category: "selfish" },
+                        { text: "Find the owner 🔍", outcome: "share", category: "empathetic" }
+                    ]
+                }
+            ],
+            keepEnding: [
+                {
+                    image: "😢",
+                    text: "Lulu kept the toy. But another child was crying because they lost it.",
+                    audio: null
+                },
+                {
+                    image: "😔",
+                    text: "Lulu felt bad inside. Keeping things that aren't ours doesn't feel good.",
+                    audio: null
+                }
+            ],
+            shareEnding: [
+                {
+                    image: "😊",
+                    text: "Lulu found the toy's owner! They were so happy!",
+                    audio: null
+                },
+                {
+                    image: "🌟",
+                    text: "Everyone felt happy! Doing the right thing makes everyone smile!",
+                    audio: null
+                }
+            ]
+        };
+
+        let currentStory = [...stories.luluStory];
+        let currentScene = 0;
+        let userChoice = null;
+
+        // Initialize story
+        function initStory() {
+            currentScene = 0;
+            updateStory();
+        }
+
+        function updateStory() {
+            const scene = currentStory[currentScene];
+            document.getElementById('storyImage').textContent = scene.image;
+            document.getElementById('storyText').textContent = scene.text;
+
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentScene === 0;
+            document.getElementById('nextBtn').style.display = scene.hasChoice ? 'none' : 'inline-block';
+            
+            if (currentScene === currentStory.length - 1 && !scene.hasChoice) {
+                document.getElementById('nextBtn').textContent = '🎉 Finish';
+                document.getElementById('nextBtn').onclick = finishStory;
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next ➡️';
+                document.getElementById('nextBtn').onclick = nextScene;
+            }
+
+            // Show choices if applicable
+            const choiceContainer = document.getElementById('choiceContainer');
+            if (scene.hasChoice) {
+                choiceContainer.innerHTML = '';
+                scene.choices.forEach(choice => {
+                    const btn = document.createElement('button');
+                    btn.className = 'choice-btn';
+                    btn.textContent = choice.text;
+                    btn.onclick = () => makeChoice(choice);
+                    choiceContainer.appendChild(btn);
+                });
+            } else {
+                choiceContainer.innerHTML = '';
+            }
+        }
+
+        function nextScene() {
+            if (currentScene < currentStory.length - 1) {
+                currentScene++;
+                updateStory();
+            }
+        }
+
+        function previousScene() {
+            if (currentScene > 0) {
+                currentScene--;
+                updateStory();
+            }
+        }
+
+        function makeChoice(choice) {
+            userChoice = choice.category;
+            
+            // Add appropriate ending
+            if (choice.outcome === 'keep') {
+                currentStory = [...currentStory.slice(0, currentScene + 1), ...stories.keepEnding];
+            } else {
+                currentStory = [...currentStory.slice(0, currentScene + 1), ...stories.shareEnding];
+            }
+            
+            nextScene();
+        }
+
+        function finishStory() {
+            showReflection("How did that story make you feel?");
+            
+            // Record activity
+            recordActivity({
+                type: 'story',
+                name: 'Lulu and the Lost Toy',
+                choice: userChoice,
+                completed: true
+            });
+        }
+
+        // Game Logic
+        let gameCanvas, gameCtx;
+        let gameScore = 0;
+        let toys = [];
+        let friends = [];
+        let draggedToy = null;
+
+        function initGame() {
+            gameCanvas = document.getElementById('gameCanvas');
+            gameCtx = gameCanvas.getContext('2d');
+            
+            // Set canvas size
+            gameCanvas.width = 800;
+            gameCanvas.height = 600;
+
+            // Initialize toys
+            toys = [
+                { emoji: '⚽', x: 100, y: 500, dragging: false, matched: false },
+                { emoji: '🎨', x: 250, y: 500, dragging: false, matched: false },
+                { emoji: '🚗', x: 400, y: 500, dragging: false, matched: false },
+                { emoji: '🧩', x: 550, y: 500, dragging: false, matched: false }
+            ];
+
+            // Initialize friends (positioned in circle)
+            friends = [
+                { name: 'Anna', emoji: '👧', x: 400, y: 100, wants: '🎨', happy: false },
+                { name: 'Ben', emoji: '👦', x: 650, y: 300, wants: '⚽', happy: false },
+                { name: 'Carla', emoji: '👧🏽', x: 400, y: 450, wants: '🧩', happy: false },
+                { name: 'Danny', emoji: '👦🏻', x: 150, y: 300, wants: '🚗', happy: false }
+            ];
+
+            // Event listeners
+            gameCanvas.addEventListener('mousedown', handleGameMouseDown);
+            gameCanvas.addEventListener('mousemove', handleGameMouseMove);
+            gameCanvas.addEventListener('mouseup', handleGameMouseUp);
+            
+            // Touch events
+            gameCanvas.addEventListener('touchstart', handleGameTouchStart);
+            gameCanvas.addEventListener('touchmove', handleGameTouchMove);
+            gameCanvas.addEventListener('touchend', handleGameTouchEnd);
+
+            gameLoop();
+        }
+
+        function gameLoop() {
+            gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+            // Draw friends
+            friends.forEach(friend => {
+                gameCtx.font = '60px Arial';
+                gameCtx.fillText(friend.emoji, friend.x - 30, friend.y);
+                
+                gameCtx.font = '20px Arial';
+                gameCtx.fillStyle = '#2d3748';
+                gameCtx.textAlign = 'center';
+                gameCtx.fillText(friend.name, friend.x, friend.y + 40);
+                
+                if (friend.happy) {
+                    gameCtx.font = '40px Arial';
+                    gameCtx.fillText('😊', friend.x, friend.y - 50);
+                }
+            });
+
+            // Draw toys
+            toys.forEach(toy => {
+                if (!toy.matched) {
+                    gameCtx.font = '50px Arial';
+                    gameCtx.fillText(toy.emoji, toy.x, toy.y);
+                }
+            });
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function handleGameMouseDown(e) {
+            const rect = gameCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            toys.forEach(toy => {
+                if (!toy.matched && x >= toy.x && x <= toy.x + 50 && y >= toy.y - 50 && y <= toy.y) {
+                    toy.dragging = true;
+                    draggedToy = toy;
+                }
+            });
+        }
+
+        function handleGameMouseMove(e) {
+            if (draggedToy) {
+                const rect = gameCanvas.getBoundingClientRect();
+                draggedToy.x = e.clientX - rect.left - 25;
+                draggedToy.y = e.clientY - rect.top;
+            }
+        }
+
+        function handleGameMouseUp(e) {
+            if (draggedToy) {
+                checkMatch(draggedToy);
+                draggedToy.dragging = false;
+                draggedToy = null;
+            }
+        }
+
+        function handleGameTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            handleGameMouseDown({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+
+        function handleGameTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            handleGameMouseMove({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+
+        function handleGameTouchEnd(e) {
+            e.preventDefault();
+            handleGameMouseUp(e);
+        }
+
+        function checkMatch(toy) {
+            friends.forEach(friend => {
+                const distance = Math.sqrt(
+                    Math.pow(toy.x - friend.x, 2) + Math.pow(toy.y - friend.y, 2)
+                );
+
+                if (distance < 80 && toy.emoji === friend.wants && !friend.happy) {
+                    friend.happy = true;
+                    toy.matched = true;
+                    gameScore += 10;
+                    updateGameScore();
+                    playCheerSound();
+
+                    // Check if game complete
+                    if (friends.every(f => f.happy)) {
+                        setTimeout(() => {
+                            showReflection("How did it feel to share toys with your friends?");
+                            recordActivity({
+                                type: 'game',
+                                name: 'Sharing Circle',
+                                score: gameScore,
+                                completed: true
+                            });
+                        }, 1000);
+                    }
+                }
+            });
+        }
+
+        function updateGameScore() {
+            const stars = '⭐'.repeat(gameScore / 10);
+            document.getElementById('gameScore').textContent = `Stars: ${stars} ${gameScore}`;
+        }
+
+        // Song Logic
+        const songLyrics = [
+            "Share your toys, share your smile 😊",
+            "Being kind is always in style! ✨",
+            "Ask before you hug so tight 🤗",
+            "Treating friends with love is right! ❤️",
+            "Everyone is special too 🌟",
+            "They're different just like you! 🌈",
+            "Kindness makes the world so bright 🌍",
+            "Let's be kind both day and night! 🌙"
+        ];
+
+        let songInterval = null;
+        let currentLyricIndex = 0;
+
+        function playSong() {
+            const lyricsDisplay = document.getElementById('lyricsDisplay');
+            const playBtn = document.getElementById('playSongBtn');
+            
+            if (songInterval) {
+                clearInterval(songInterval);
+                songInterval = null;
+                playBtn.textContent = '▶️ Play Song';
+                lyricsDisplay.textContent = 'Click play to start the song!';
+                currentLyricIndex = 0;
+                return;
+            }
+
+            playBtn.textContent = '⏸️ Pause Song';
+            currentLyricIndex = 0;
+
+            songInterval = setInterval(() => {
+                if (currentLyricIndex < songLyrics.length) {
+                    lyricsDisplay.innerHTML = `<div class="lyrics-line">${songLyrics[currentLyricIndex]}</div>`;
+                    currentLyricIndex++;
+                } else {
+                    clearInterval(songInterval);
+                    songInterval = null;
+                    playBtn.textContent = '▶️ Play Again';
+                    
+                    setTimeout(() => {
+                        showReflection("Did you like the Kindness Song?");
+                        recordActivity({
+                            type: 'song',
+                            name: 'The Kindness Song',
+                            completed: true
+                        });
+                    }, 1000);
+                }
+            }, 3000);
+        }
+
+        // Coloring Logic
+        let coloringCanvas, coloringCtx;
+        let selectedColor = '#FFD93D';
+        let isDrawing = false;
+
+        function initColoring() {
+            coloringCanvas = document.getElementById('coloringCanvas');
+            coloringCtx = coloringCanvas.getContext('2d');
+            
+            coloringCanvas.width = 800;
+            coloringCanvas.height = 600;
+
+            // Create color palette
+            const colors = ['#FFD93D', '#fd79a8', '#74b9ff', '#55efc4', '#a29bfe', 
+                           '#ff6b6b', '#4ecdc4', '#95e1d3', '#f38181', '#aa96da'];
+            const palette = document.getElementById('colorPalette');
+            
+            colors.forEach(color => {
+                const btn = document.createElement('button');
+                btn.className = 'color-btn';
+                btn.style.background = color;
+                btn.onclick = () => selectColor(btn, color);
+                palette.appendChild(btn);
+            });
+
+            // Draw Emmy outline
+            drawEmmyOutline();
+
+            // Event listeners
+            coloringCanvas.addEventListener('mousedown', startDrawing);
+            coloringCanvas.addEventListener('mousemove', draw);
+            coloringCanvas.addEventListener('mouseup', stopDrawing);
+            coloringCanvas.addEventListener('touchstart', handleTouchStart);
+            coloringCanvas.addEventListener('touchmove', handleTouchMove);
+            coloringCanvas.addEventListener('touchend', stopDrawing);
+        }
+
+        function selectColor(btn, color) {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedColor = color;
+        }
+
+        function drawEmmyOutline() {
+            coloringCtx.strokeStyle = '#2d3748';
+            coloringCtx.lineWidth = 3;
+            
+            // Draw simple dove outline (Emmy)
+            coloringCtx.font = '200px Arial';
+            coloringCtx.strokeText('🕊️', 300, 350);
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = coloringCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            coloringCtx.fillStyle = selectedColor;
+            coloringCtx.beginPath();
+            coloringCtx.arc(x, y, 15, 0, Math.PI * 2);
+            coloringCtx.fill();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            isDrawing = true;
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            
+            const touch = e.touches[0];
+            const rect = coloringCanvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            coloringCtx.fillStyle = selectedColor;
+            coloringCtx.beginPath();
+            coloringCtx.arc(x, y, 15, 0, Math.PI * 2);
+            coloringCtx.fill();
+        }
+
+        function saveColoring() {
+            const dataURL = coloringCanvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'my-emmy-coloring.png';
+            link.href = dataURL;
+            link.click();
+
+            showReflection("Great job coloring! Do you like your artwork?");
+            recordActivity({
+                type: 'coloring',
+                name: 'Emmy Coloring',
+                completed: true
+            });
+        }
+
+        // Activity Management
+        function showActivity(activityName) {
+            // Hide all activities
+            document.querySelectorAll('.activity-space').forEach(space => {
+                space.classList.remove('active');
+            });
+
+            // Show selected activity
+            const activity = document.getElementById(activityName);
+            activity.classList.add('active');
+
+            // Initialize activity-specific logic
+            if (activityName === 'stories' && currentScene === 0) {
+                initStory();
+            } else if (activityName === 'games' && !gameCanvas) {
+                initGame();
+            } else if (activityName === 'coloring' && !coloringCanvas) {
+                initColoring();
+            }
+        }
+
+        // Reflection System
+        let selectedFeeling = null;
+
+        function showReflection(question) {
+            document.getElementById('reflectionQuestion').textContent = question;
+            document.getElementById('reflectionModal').classList.add('active');
+        }
+
+        function selectFeeling(btn) {
+            document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedFeeling = btn.dataset.feeling;
+        }
+
+        function closeReflection() {
+            if (selectedFeeling) {
+                document.getElementById('reflectionModal').classList.remove('active');
+                selectedFeeling = null;
+                updateProgress();
+            }
+        }
+
+        // Progress Tracking
+        function recordActivity(activity) {
+            const userId = getUserId();
+            let progress = JSON.parse(localStorage.getItem(`progress_${userId}`) || '{"activities": [], "stars": 0}');
+            
+            progress.activities.push({
+                ...activity,
+                timestamp: new Date().toISOString(),
+                feeling: selectedFeeling
+            });
+            
+            progress.stars += 1;
+            
+            localStorage.setItem(`progress_${userId}`, JSON.stringify(progress));
+        }
+
+        function updateProgress() {
+            const userId = getUserId();
+            let progress = JSON.parse(localStorage.getItem(`progress_${userId}`) || '{"stars": 0}');
+            const stars = '⭐'.repeat(Math.min(progress.stars, 5)) + '☆'.repeat(Math.max(0, 5 - progress.stars));
+            document.getElementById('progressStars').textContent = stars;
+        }
+
+        function getUserId() {
+            const user = JSON.parse(localStorage.getItem('emancipation_user') || '{"id": "demo_user"}');
+            return user.id;
+        }
+
+        // Sound Effects (simulated)
+        function playCheerSound() {
+            console.log('🎉 Cheer sound!');
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
