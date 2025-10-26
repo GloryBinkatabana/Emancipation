@@ -1,0 +1,411 @@
+/* CSS for age-3-5.html - Kindness Kingdom styles */
+
+body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+    background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 100%);
+    color: #2d3748;
+    overflow-x: hidden;
+}
+
+/* Navigation for Kids */
+.kingdom-header {
+    background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mascot-welcome {
+    font-size: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.progress-stars {
+    font-size: 2rem;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Container */
+.kingdom-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.welcome-message {
+    text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 30px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-message h1 {
+    font-size: 2.5rem;
+    color: #fd79a8;
+    margin-bottom: 1rem;
+}
+
+/* Activity Menu */
+.activity-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.activity-btn {
+    background: white;
+    border: 5px solid #FFD93D;
+    border-radius: 25px;
+    padding: 2rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.activity-btn:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.activity-btn .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Activity Space */
+.activity-space {
+    background: white;
+    border-radius: 30px;
+    padding: 2rem;
+    min-height: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.activity-space.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Story Viewer */
+.story-container {
+    text-align: center;
+}
+
+.story-scene {
+    background: #f7fafc;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-image {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+}
+
+.story-text {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #2d3748;
+    max-width: 600px;
+}
+
+.story-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.story-btn {
+    background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.story-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(253, 121, 168, 0.4);
+}
+
+.story-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Choice Buttons */
+.choice-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.choice-btn {
+    background: white;
+    border: 4px solid #FFD93D;
+    padding: 1.5rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 200px;
+}
+
+.choice-btn:hover {
+    background: #FFD93D;
+    transform: scale(1.05);
+}
+
+/* Games */
+.game-canvas {
+    width: 100%;
+    max-width: 800px;
+    height: 600px;
+    background: #f7fafc;
+    border-radius: 20px;
+    margin: 0 auto;
+    display: block;
+    border: 5px solid #FFD93D;
+}
+
+.game-instructions {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+}
+
+.game-score {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fd79a8;
+    font-weight: bold;
+}
+
+/* Songs */
+.song-player {
+    text-align: center;
+    padding: 2rem;
+}
+
+.song-title {
+    font-size: 2rem;
+    color: #fd79a8;
+    margin-bottom: 2rem;
+}
+
+.lyrics-display {
+    font-size: 1.5rem;
+    line-height: 2;
+    color: #2d3748;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lyrics-line {
+    animation: bounceIn 0.5s ease;
+}
+
+.play-btn {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border: none;
+    padding: 1.5rem 3rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Coloring Activity */
+.coloring-container {
+    text-align: center;
+}
+
+.color-palette {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.color-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid white;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.color-btn:hover,
+.color-btn.selected {
+    transform: scale(1.2);
+    border-color: #2d3748;
+}
+
+/* Reflection Modal */
+.reflection-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.reflection-modal.active {
+    display: flex;
+}
+
+.reflection-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 30px;
+    max-width: 500px;
+    text-align: center;
+    animation: bounceIn 0.5s ease;
+}
+
+.reflection-content .emmy-mascot {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.reflection-question {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #2d3748;
+}
+
+.emoji-choices {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.emoji-btn {
+    font-size: 4rem;
+    background: none;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.emoji-btn:hover,
+.emoji-btn.selected {
+    border-color: #FFD93D;
+    background: rgba(255, 217, 61, 0.1);
+    transform: scale(1.2);
+}
+
+.continue-btn {
+    background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 25px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all 0.3s;
+}
+
+.continue-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Back Button */
+.back-home {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: white;
+    border: 4px solid #fd79a8;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: #2d3748;
+    font-weight: bold;
+}
+
+.back-home:hover {
+    transform: scale(1.1);
+    background: #fd79a8;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .kingdom-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .welcome-message h1 {
+        font-size: 1.8rem;
+    }
+
+    .story-text {
+        font-size: 1.2rem;
+    }
+
+    .game-canvas {
+        height: 400px;
+    }
+}
