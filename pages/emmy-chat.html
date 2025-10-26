@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Emmy the Dove | Emancipation</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/emmy-chatbot.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <span class="dove-mascot">🕊️</span>
+                Emancipation
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="crisis.html" class="crisis-btn">🆘 Need Help Now?</a>
+        </div>
+    </nav>
+
+    <!-- Emmy Chatbot Container -->
+    <div class="emmy-container">
+        <div class="emmy-chatbot">
+            <!-- Header -->
+            <div class="emmy-header">
+                <div class="emmy-logo">
+                    <span class="emmy-mascot">🕊️</span>
+                    Emmy the Dove
+                </div>
+                <div class="emmy-controls">
+                    <div class="emmy-points">
+                        <span id="points-display">🏆 0 - Level 1</span>
+                    </div>
+                    <button id="sound-toggle" class="control-btn" title="Sound Toggle">🔊</button>
+                    <button id="clear-history" class="control-btn" title="Clear History">🗑️</button>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="messages-container" class="messages-container">
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="message emmy" style="display: none;">
+                    <div class="message-avatar">🕊️</div>
+                    <div class="message-bubble">
+                        <div class="typing-indicator">
+                            <span>Emmy is thinking</span>
+                            <div class="typing-dots">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speaking Indicator -->
+                <div id="speaking-indicator" class="speaking-indicator" style="display: none;">
+                    <span>Emmy is speaking...</span>
+                    <div class="speaking-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <input
+                    id="input-field"
+                    type="text"
+                    class="input-field"
+                    placeholder="Type your message here..."
+                    autocomplete="off"
+                />
+                <button id="voice-btn" class="input-btn voice-btn" title="Voice Input">
+                    🎤
+                </button>
+                <button id="send-btn" class="input-btn send-btn" title="Send Message">
+                    ➤
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Modal -->
+    <div id="welcome-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>🕊️ Welcome to Emmy's Chat!</h2>
+            <p>Hi there! I'm Emmy the Dove, your friendly AI companion. I'm here to chat with you about:</p>
+            <ul style="text-align: left; margin: 1rem 0;">
+                <li>🤝 Kindness and respect</li>
+                <li>🛡️ Staying safe online and offline</li>
+                <li>💭 Understanding feelings and emotions</li>
+                <li>👥 Building healthy friendships</li>
+                <li>⚖️ Fairness and equality</li>
+            </ul>
+            <p><strong>Remember:</strong> I'm here to help and support you. If you ever need to talk to a real person about something serious, please tell a trusted adult!</p>
+            <button onclick="closeWelcomeModal()" class="btn btn-primary">Start Chatting! 🎉</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../JavaScript/main.js"></script>
+    <script src="../JavaScript/emmy-chatbot-simple.js"></script>
+    <script>
+        // Welcome modal functions
+        function showWelcomeModal() {
+            document.getElementById('welcome-modal').style.display = 'flex';
+        }
+        
+        function closeWelcomeModal() {
+            document.getElementById('welcome-modal').style.display = 'none';
+        }
+
+        // Show welcome modal for first-time users
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasVisited = localStorage.getItem('emmy-visited');
+            if (!hasVisited) {
+                setTimeout(showWelcomeModal, 2000);
+                localStorage.setItem('emmy-visited', 'true');
+            }
+        });
+    </script>
+
+    <style>
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 1rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content ul {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .modal-content li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</body>
+</html>

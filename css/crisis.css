@@ -1,0 +1,440 @@
+/* CSS for crisis.html - Crisis resources page styles */
+
+body {
+    background: #f5f7fa;
+}
+
+/* Alert Banner */
+.alert-banner {
+    margin-top: 80px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.alert-banner h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.alert-banner p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+}
+
+.emergency-notice {
+    background: white;
+    color: #f5576c;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    margin: 1rem auto 0;
+    max-width: 800px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Immediate Help Section */
+.immediate-help {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: #4a5568;
+    font-size: 1.1rem;
+}
+
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.help-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border-left: 5px solid;
+}
+
+.help-card.urgent {
+    border-left-color: #f5576c;
+    background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+}
+
+.help-card.support {
+    border-left-color: #667eea;
+}
+
+.help-card.text {
+    border-left-color: #55efc4;
+}
+
+.help-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.help-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.help-card.urgent .help-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.help-card.support .help-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.help-card.text .help-icon {
+    background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+}
+
+.help-card h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.help-card .hotline {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f5576c;
+    margin: 1rem 0;
+    word-break: break-all;
+}
+
+.help-card.support .hotline {
+    color: #667eea;
+}
+
+.help-card.text .hotline {
+    color: #00b894;
+}
+
+.availability {
+    display: inline-block;
+    background: #f7fafc;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin: 0.5rem 0;
+}
+
+.help-description {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+.call-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.call-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.help-card.urgent .call-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.help-card.text .call-btn {
+    background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+}
+
+/* Resources by Topic */
+.resources-by-topic {
+    background: white;
+    padding: 4rem 2rem;
+    margin: 3rem 0;
+}
+
+.resources-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.topic-card {
+    background: #f7fafc;
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s;
+    border-top: 4px solid;
+    cursor: pointer;
+}
+
+.topic-card:nth-child(1) { border-top-color: #f5576c; }
+.topic-card:nth-child(2) { border-top-color: #667eea; }
+.topic-card:nth-child(3) { border-top-color: #55efc4; }
+.topic-card:nth-child(4) { border-top-color: #FFD93D; }
+.topic-card:nth-child(5) { border-top-color: #a29bfe; }
+.topic-card:nth-child(6) { border-top-color: #fd79a8; }
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.topic-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.topic-card h3 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.topic-card p {
+    color: #4a5568;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.resource-list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.resource-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.resource-list li:last-child {
+    border-bottom: none;
+}
+
+/* Safety Planning */
+.safety-planning {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.safety-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.safety-steps {
+    margin-top: 2rem;
+}
+
+.safety-step {
+    background: #f7fafc;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #667eea;
+}
+
+.safety-step h4 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.safety-step p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Trusted Adults Tool */
+.trusted-adults {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    padding: 4rem 2rem;
+}
+
+.trusted-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.circle-form {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.circle-entry {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f7fafc;
+    border-radius: 15px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+.add-person-btn {
+    background: #667eea;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-person-btn:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+.save-circle-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.3s;
+}
+
+.save-circle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+/* Important Notice */
+.important-notice {
+    background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+    color: #2d3748;
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 3rem auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.important-notice h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.important-notice p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .alert-banner h1 {
+        font-size: 1.5rem;
+    }
+
+    .alert-banner p {
+        font-size: 1rem;
+    }
+
+    .help-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topic-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .safety-card {
+        padding: 2rem;
+    }
+}
