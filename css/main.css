@@ -214,3 +214,71 @@ footer {
         font-size: 1.5rem;
     }
 }
+/* Em
+my Floating Button */
+.emmy-float-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}
+
+.emmy-float-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #f5576c 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s;
+    animation: emmyFloat 3s ease-in-out infinite;
+}
+
+.emmy-float-link:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+}
+
+.emmy-float-icon {
+    font-size: 1.5rem;
+    animation: float 2s ease-in-out infinite;
+}
+
+.emmy-float-text {
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+@keyframes emmyFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Mobile responsive for floating button */
+@media (max-width: 768px) {
+    .emmy-float-button {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .emmy-float-link {
+        padding: 0.8rem 1.2rem;
+        border-radius: 40px;
+    }
+    
+    .emmy-float-text {
+        font-size: 0.9rem;
+    }
+    
+    .emmy-float-icon {
+        font-size: 1.3rem;
+    }
+}
