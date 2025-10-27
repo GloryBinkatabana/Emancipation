@@ -27,6 +27,11 @@ class EmmyDove {
         // Initial greeting
         setTimeout(() => {
             this.addEmmyMessage("Hi there! 🕊️ I'm Emmy the Dove! I'm here to chat with you about kindness, respect, and staying safe. How old are you?");
+            
+            // Development notice
+            setTimeout(() => {
+                this.addEmmyMessage("🚧 Just so you know, I'm still learning and growing! My responses are getting better every day, but if you need immediate help, please talk to a trusted adult. 💙");
+            }, 2000);
         }, 1000);
     }
 

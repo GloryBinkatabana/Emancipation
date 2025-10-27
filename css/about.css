@@ -1,5 +1,9 @@
 /* CSS for about.html - About page styles */
 
+body {
+    background: #f5f7fa;
+}
+
 /* Hero Section */
 .about-hero {
     margin-top: 80px;
@@ -250,8 +254,73 @@
     flex-wrap: wrap;
 }
 
-/* Responsive */
+.btn {
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: white;
+    color: #667eea;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .about-hero {
+        padding: 4rem 2rem;
+    }
+    
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .mission-vision {
+        margin: 3rem auto;
+        gap: 2rem;
+    }
+    
+    .values-section {
+        padding: 4rem 2rem;
+    }
+    
+    .story-section {
+        margin: 4rem auto;
+    }
+    
+    .approach-section {
+        padding: 4rem 2rem;
+    }
+    
+    .cta-section {
+        padding: 4rem 2rem;
+    }
+}
+
 @media (max-width: 768px) {
+    .about-hero {
+        padding: 3rem 1rem;
+    }
+    
     .about-hero h1 {
         font-size: 2rem;
     }
@@ -262,9 +331,211 @@
 
     .mission-vision {
         grid-template-columns: 1fr;
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+    
+    .mission-card, .vision-card {
+        padding: 2rem;
+    }
+    
+    .mission-card h2, .vision-card h2 {
+        font-size: 1.8rem;
+    }
+
+    .values-section {
+        padding: 3rem 1rem;
+    }
+    
+    .values-section h2 {
+        font-size: 2rem;
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .value-card {
+        padding: 1.5rem;
+    }
+    
+    .value-icon {
+        font-size: 2.5rem;
+    }
+
+    .story-section {
+        padding: 0 1rem;
+        margin: 3rem auto;
+    }
+    
+    .story-section h2 {
+        font-size: 2rem;
     }
 
     .story-content {
         padding: 2rem;
+    }
+    
+    .story-content p {
+        font-size: 1rem;
+    }
+    
+    .highlight-box {
+        padding: 1.5rem;
+    }
+
+    .approach-section {
+        padding: 3rem 1rem;
+    }
+    
+    .approach-section h2 {
+        font-size: 2rem;
+    }
+    
+    .approach-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .approach-card {
+        padding: 1.5rem;
+    }
+
+    .cta-section {
+        padding: 3rem 1rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-section p {
+        font-size: 1.1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        padding: 2rem 0.5rem;
+    }
+    
+    .about-hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .mission-vision {
+        padding: 0 0.5rem;
+    }
+    
+    .mission-card, .vision-card {
+        padding: 1.5rem;
+    }
+    
+    .mission-card h2, .vision-card h2 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .values-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .value-card {
+        padding: 1rem;
+    }
+    
+    .value-icon {
+        font-size: 2rem;
+    }
+    
+    .value-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .value-card p {
+        font-size: 0.85rem;
+    }
+
+    .story-section {
+        padding: 0 0.5rem;
+    }
+    
+    .story-content {
+        padding: 1.5rem;
+    }
+    
+    .highlight-box {
+        padding: 1rem;
+    }
+
+    .approach-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    .approach-card {
+        padding: 1rem;
+    }
+    
+    .approach-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .cta-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    .btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .mission-card:hover,
+    .vision-card:hover,
+    .value-card:hover,
+    .approach-card:hover {
+        transform: none;
+    }
+    
+    .mission-card:active,
+    .vision-card:active,
+    .value-card:active,
+    .approach-card:active {
+        transform: scale(0.98);
+    }
+    
+    .btn-primary:hover,
+    .btn-secondary:hover {
+        transform: none;
+    }
+    
+    .btn-primary:active,
+    .btn-secondary:active {
+        transform: scale(0.95);
     }
 }

@@ -1,10 +1,53 @@
 /* CSS for age-3-5.html - Kindness Kingdom styles */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
-    background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 100%);
+    background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 50%, #FFD93D 100%);
+    background-size: 400% 400%;
+    animation: gentleGradient 8s ease infinite;
+    position: relative;
     color: #2d3748;
     overflow-x: hidden;
+}
+
+body::before {
+    content: '🌟 ⭐ 🎨 🌈 💖 🦋 🌸 🎈';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 2rem;
+    opacity: 0.1;
+    animation: floatingEmojis 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    white-space: pre;
+    line-height: 4rem;
+}
+
+@keyframes gentleGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes floatingEmojis {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+    }
 }
 
 /* Navigation for Kids */
@@ -15,11 +58,18 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
 }
 
 .mascot-welcome {
     font-size: 2rem;
     animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .progress-stars {
@@ -35,6 +85,8 @@ body {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .welcome-message {
@@ -97,6 +149,17 @@ body {
 .activity-space.active {
     display: block;
     animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Story Viewer */
@@ -243,6 +306,20 @@ body {
     animation: bounceIn 0.5s ease;
 }
 
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .play-btn {
     background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     border: none;
@@ -382,6 +459,7 @@ body {
     text-decoration: none;
     color: #2d3748;
     font-weight: bold;
+    z-index: 1000;
 }
 
 .back-home:hover {
@@ -390,22 +468,161 @@ body {
     color: white;
 }
 
-/* Responsive */
+/* Emmy Helper Button */
+.emmy-helper-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 1000;
+}
+
+.emmy-helper-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #FFD93D 0%, #fd79a8 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(255, 217, 61, 0.4);
+    transition: all 0.3s;
+    animation: emmyBounce 2s ease-in-out infinite;
+}
+
+.emmy-helper-link:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(255, 217, 61, 0.6);
+}
+
+.emmy-helper-icon {
+    font-size: 1.5rem;
+    animation: float 2s ease-in-out infinite;
+}
+
+.emmy-helper-text {
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+@keyframes emmyBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .kingdom-header {
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem;
+    }
+
+    .kingdom-container {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+
+    .welcome-message {
+        padding: 1.5rem;
     }
 
     .welcome-message h1 {
         font-size: 1.8rem;
     }
 
+    .activity-menu {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .activity-btn {
+        padding: 1.5rem 0.5rem;
+        font-size: 1rem;
+    }
+
+    .activity-btn .icon {
+        font-size: 2.5rem;
+    }
+
     .story-text {
         font-size: 1.2rem;
     }
 
+    .story-image {
+        height: 200px;
+        font-size: 3rem;
+    }
+
     .game-canvas {
         height: 400px;
+    }
+
+    .choice-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .choice-btn {
+        min-width: 250px;
+    }
+
+    .emmy-helper-btn {
+        bottom: 1.5rem;
+        left: 1.5rem;
+    }
+    
+    .emmy-helper-link {
+        padding: 0.8rem 1.2rem;
+        border-radius: 40px;
+    }
+    
+    .emmy-helper-text {
+        font-size: 0.9rem;
+    }
+    
+    .emmy-helper-icon {
+        font-size: 1.3rem;
+    }
+
+    .back-home {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-message h1 {
+        font-size: 1.5rem;
+    }
+
+    .activity-menu {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .story-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .reflection-content {
+        padding: 2rem 1rem;
+        margin: 1rem;
+    }
+
+    .emoji-choices {
+        gap: 1rem;
+    }
+
+    .emoji-btn {
+        font-size: 3rem;
+        padding: 0.5rem;
     }
 }
