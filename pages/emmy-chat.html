@@ -111,64 +111,6 @@
     <!-- Scripts -->
     <script src="../JavaScript/main.js"></script>
     <script src="../JavaScript/emmy-chatbot-simple.js"></script>
-    <script>
-        // Welcome modal functions
-        function showWelcomeModal() {
-            document.getElementById('welcome-modal').style.display = 'flex';
-        }
-        
-        function closeWelcomeModal() {
-            document.getElementById('welcome-modal').style.display = 'none';
-        }
-
-        // Show welcome modal for first-time users
-        document.addEventListener('DOMContentLoaded', () => {
-            const hasVisited = localStorage.getItem('emmy-visited');
-            if (!hasVisited) {
-                setTimeout(showWelcomeModal, 2000);
-                localStorage.setItem('emmy-visited', 'true');
-            }
-        });
-    </script>
-
-    <style>
-        /* Modal styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            max-width: 500px;
-            margin: 1rem;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-content h2 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content ul {
-            color: #4a5568;
-            line-height: 1.8;
-        }
-
-        .modal-content li {
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <script src="../JavaScript/emmy-chat.js"></script>
 </body>
 </html>
