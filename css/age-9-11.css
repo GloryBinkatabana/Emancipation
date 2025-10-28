@@ -536,6 +536,42 @@ body {
     background: #55efc4;
     color: white;
 }
+.emmy-helper-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+
+        .emmy-helper-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 8px 25px #55efc4;
+            transition: all 0.3s;
+            animation: emmyBounce 2s ease-in-out infinite;
+        }
+
+        .emmy-helper-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px #55efc4;
+        }
+
+        .emmy-helper-icon {
+            font-size: 1.5rem;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .emmy-helper-text {
+            font-size: 1rem;
+            white-space: nowrap;
+        }
 
 /* Responsive */
 @media (max-width: 768px) {
